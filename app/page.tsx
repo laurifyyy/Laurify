@@ -289,21 +289,90 @@ export default function LaurifyHomepage() {
           .mobile-hidden { display: none !important; }
         }
 
-        input, textarea {
+        .form-field {
+          position: relative;
+          margin-bottom: 2rem;
+        }
+        .form-field input,
+        .form-field textarea {
           width: 100%;
-          padding: 0.9rem 1rem;
-          border: 1px solid var(--beige-mid);
+          border: none;
+          border-bottom: 1.5px solid var(--beige-mid);
           background: transparent;
+          padding: 1.5rem 0 0.6rem;
           font-family: 'Gabriel Sans', sans-serif;
-          font-size: 0.85rem;
+          font-size: 0.9rem;
           color: var(--navy);
           outline: none;
+          display: block;
           transition: border-color 0.3s;
-          margin-bottom: 1rem;
         }
-        input::placeholder, textarea::placeholder { color: #a09890; }
-        input:focus, textarea:focus { border-color: var(--gold); }
-        textarea { resize: vertical; min-height: 120px; }
+        .form-field textarea {
+          resize: none;
+          min-height: 80px;
+        }
+        .form-field label {
+          position: absolute;
+          top: 1.5rem;
+          left: 0;
+          font-family: 'Gabriel Sans', sans-serif;
+          font-size: 0.85rem;
+          color: #a09890;
+          transition: all 0.22s ease;
+          pointer-events: none;
+          letter-spacing: 0.03em;
+        }
+        .form-field input:focus ~ label,
+        .form-field input:not(:placeholder-shown) ~ label,
+        .form-field textarea:focus ~ label,
+        .form-field textarea:not(:placeholder-shown) ~ label {
+          top: 0.15rem;
+          font-size: 0.6rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--taupe);
+        }
+        .form-field::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 1.5px;
+          background: var(--navy);
+          transition: width 0.3s ease;
+        }
+        .form-field:focus-within::after { width: 100%; }
+        .form-select-wrap {
+          margin-bottom: 2rem;
+        }
+        .form-select-label {
+          display: block;
+          font-family: 'Gabriel Sans', sans-serif;
+          font-size: 0.6rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--taupe);
+          margin-bottom: 0.5rem;
+        }
+        .form-select {
+          width: 100%;
+          border: none;
+          border-bottom: 1.5px solid var(--beige-mid);
+          background: transparent;
+          font-family: 'Gabriel Sans', sans-serif;
+          font-size: 0.9rem;
+          color: var(--navy);
+          outline: none;
+          padding: 0.6rem 1.5rem 0.6rem 0;
+          appearance: none;
+          cursor: pointer;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23605952' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 0.2rem center;
+          transition: border-color 0.3s;
+        }
+        .form-select:focus { border-color: var(--navy); }
       `}</style>
 
       {/* NAV */}
@@ -1142,35 +1211,43 @@ export default function LaurifyHomepage() {
                 {dict.contact.formTitle}
               </h3>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 1rem" }}>
-                <input type="text" placeholder={dict.contact.firstName} />
-                <input type="text" placeholder={dict.contact.lastName} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 2rem" }}>
+                <div className="form-field">
+                  <input type="text" placeholder=" " id="firstName" autoComplete="given-name" />
+                  <label htmlFor="firstName">{dict.contact.firstName}</label>
+                </div>
+                <div className="form-field">
+                  <input type="text" placeholder=" " id="lastName" autoComplete="family-name" />
+                  <label htmlFor="lastName">{dict.contact.lastName}</label>
+                </div>
               </div>
-              <input type="email" placeholder={dict.contact.emailPlaceholder} />
-              <input type="tel" placeholder={dict.contact.phonePlaceholder} />
-              <select
-                style={{
-                  width: "100%",
-                  padding: "0.9rem 1rem",
-                  border: "1px solid var(--beige-mid)",
-                  background: "transparent",
-                  fontFamily: "'Gabriel Sans', sans-serif",
-                  fontSize: "0.85rem",
-                  color: "#605952",
-                  outline: "none",
-                  marginBottom: "1rem",
-                  appearance: "none",
-                  cursor: "pointer",
-                }}
-              >
-                <option value="" disabled>{dict.contact.selectService}</option>
-                {services.map((s) => (
-                  <option key={s.title} value={s.title}>{s.title}</option>
-                ))}
-              </select>
-              <textarea placeholder={dict.contact.notes} />
 
-              <button className="btn-primary" style={{ width: "100%", border: "none" }}>
+              <div className="form-field">
+                <input type="email" placeholder=" " id="email" autoComplete="email" />
+                <label htmlFor="email">{dict.contact.emailPlaceholder}</label>
+              </div>
+
+              <div className="form-field">
+                <input type="tel" placeholder=" " id="phone" autoComplete="tel" />
+                <label htmlFor="phone">{dict.contact.phonePlaceholder}</label>
+              </div>
+
+              <div className="form-select-wrap">
+                <span className="form-select-label">{dict.contact.selectService}</span>
+                <select className="form-select" defaultValue="">
+                  <option value="" disabled />
+                  {services.map((s) => (
+                    <option key={s.title} value={s.title}>{s.title}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-field">
+                <textarea placeholder=" " id="notes" />
+                <label htmlFor="notes">{dict.contact.notes}</label>
+              </div>
+
+              <button className="btn-primary" style={{ width: "100%", border: "none", marginTop: "0.5rem" }}>
                 {dict.contact.submitBtn}
               </button>
             </div>
