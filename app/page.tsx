@@ -56,34 +56,36 @@ export default function LaurifyHomepage() {
   return (
     <div
       style={{
-        fontFamily: "'Playfair Display', Georgia, serif",
+        fontFamily: "'Cormorant Garant', Georgia, serif",
         backgroundColor: "var(--cream)",
-        color: "#1B2A4A",
+        color: "var(--dark)",
         overflowX: "hidden",
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@200;300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-          --cream: #F2EDDE;
-          --beige: #E8E0CC;
-          --beige-mid: #D0C5AD;
-          --navy: #1B2A4A;
-          --navy-mid: #243356;
-          --gold: #B8975A;
-          --gold-light: #DFC99A;
+          --cream: #F5F4E4;
+          --beige: #E3D4BE;
+          --beige-mid: #C9BBA8;
+          --navy: #0A1F48;
+          --navy-mid: #0D2454;
+          --gold: #E3D4BE;
+          --gold-light: #F0EAE0;
+          --taupe: #605952;
+          --dark: #29211B;
           --white: #FFFFFF;
         }
 
         html { scroll-behavior: smooth; }
 
-        .sans { font-family: 'Raleway', sans-serif; }
+        .sans { font-family: 'Jost', sans-serif; }
 
         .nav-link {
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Jost', sans-serif;
           font-weight: 300;
           font-size: 0.75rem;
           letter-spacing: 0.2em;
@@ -97,7 +99,7 @@ export default function LaurifyHomepage() {
 
         .btn-primary {
           display: inline-block;
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Jost', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -118,7 +120,7 @@ export default function LaurifyHomepage() {
 
         .btn-outline {
           display: inline-block;
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Jost', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -138,7 +140,7 @@ export default function LaurifyHomepage() {
 
         .btn-light {
           display: inline-block;
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Jost', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -146,7 +148,7 @@ export default function LaurifyHomepage() {
           padding: 1rem 2.5rem;
           background: transparent;
           color: var(--cream);
-          border: 1px solid rgba(253,250,246,0.4);
+          border: 1px solid rgba(245,244,228,0.4);
           cursor: pointer;
           transition: all 0.4s ease;
           text-decoration: none;
@@ -223,7 +225,7 @@ export default function LaurifyHomepage() {
           background: none;
           border: none;
           cursor: pointer;
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Jost', sans-serif;
           font-size: 0.65rem;
           letter-spacing: 0.15em;
           text-transform: uppercase;
@@ -231,7 +233,7 @@ export default function LaurifyHomepage() {
           transition: color 0.3s;
         }
         .lang-sep {
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Jost', sans-serif;
           font-size: 0.55rem;
           opacity: 0.3;
         }
@@ -250,14 +252,14 @@ export default function LaurifyHomepage() {
           padding: 0.9rem 1rem;
           border: 1px solid var(--beige-mid);
           background: transparent;
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Jost', sans-serif;
           font-size: 0.85rem;
           color: var(--navy);
           outline: none;
           transition: border-color 0.3s;
           margin-bottom: 1rem;
         }
-        input::placeholder, textarea::placeholder { color: #9aa0a6; }
+        input::placeholder, textarea::placeholder { color: #a09890; }
         input:focus, textarea:focus { border-color: var(--gold); }
         textarea { resize: vertical; min-height: 120px; }
       `}</style>
@@ -271,7 +273,7 @@ export default function LaurifyHomepage() {
           right: 0,
           zIndex: 100,
           padding: navScrolled ? "1rem 3rem" : "1.8rem 3rem",
-          background: navScrolled ? "rgba(253,250,246,0.97)" : "transparent",
+          background: navScrolled ? "rgba(245,244,228,0.97)" : "transparent",
           borderBottom: navScrolled ? "1px solid var(--beige)" : "none",
           backdropFilter: navScrolled ? "blur(12px)" : "none",
           transition: "all 0.4s ease",
@@ -282,7 +284,7 @@ export default function LaurifyHomepage() {
       >
         <div
           style={{
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "'Cormorant Garant', serif",
             fontSize: "1.8rem",
             fontWeight: 700,
             letterSpacing: "0.12em",
@@ -320,7 +322,7 @@ export default function LaurifyHomepage() {
                       ? "var(--gold)"
                       : navScrolled
                       ? "var(--navy)"
-                      : "rgba(237,227,211,0.6)",
+                      : "rgba(245,244,228,0.6)",
                     fontWeight: lang === l ? 500 : 300,
                   }}
                 >
@@ -335,7 +337,7 @@ export default function LaurifyHomepage() {
             className="nav-link"
             style={{
               color: navScrolled ? "var(--navy)" : "var(--cream)",
-              border: `1px solid ${navScrolled ? "var(--navy)" : "rgba(253,250,246,0.5)"}`,
+              border: `1px solid ${navScrolled ? "var(--navy)" : "rgba(245,244,228,0.5)"}`,
               padding: "0.55rem 1.4rem",
             }}
           >
@@ -365,7 +367,7 @@ export default function LaurifyHomepage() {
         ref={heroRef}
         style={{
           minHeight: "100vh",
-          background: `linear-gradient(160deg, var(--navy) 0%, #1A2E42 50%, #243347 100%)`,
+          background: `linear-gradient(160deg, #0A1F48 0%, #0C2250 60%, #0A1F48 100%)`,
           display: "flex",
           alignItems: "center",
           position: "relative",
@@ -377,8 +379,8 @@ export default function LaurifyHomepage() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `radial-gradient(ellipse at 70% 30%, rgba(197,169,122,0.12) 0%, transparent 60%),
-              radial-gradient(ellipse at 20% 80%, rgba(197,169,122,0.08) 0%, transparent 50%)`,
+            backgroundImage: `radial-gradient(ellipse at 70% 30%, rgba(227,212,190,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(227,212,190,0.08) 0%, transparent 50%)`,
             pointerEvents: "none",
           }}
         />
@@ -393,7 +395,7 @@ export default function LaurifyHomepage() {
             bottom: "10%",
             width: "1px",
             background:
-              "linear-gradient(to bottom, transparent, rgba(197,169,122,0.4), transparent)",
+              "linear-gradient(to bottom, transparent, rgba(227,212,190,0.4), transparent)",
           }}
         />
 
@@ -405,10 +407,10 @@ export default function LaurifyHomepage() {
             right: "8%",
             top: "50%",
             transform: "translateY(-50%)",
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "'Cormorant Garant', serif",
             fontSize: "clamp(12rem, 18vw, 22rem)",
             fontWeight: 400,
-            color: "rgba(197,169,122,0.06)",
+            color: "rgba(227,212,190,0.06)",
             lineHeight: 1,
             userSelect: "none",
             pointerEvents: "none",
@@ -434,7 +436,7 @@ export default function LaurifyHomepage() {
           <h1
             className="hero-animate-delay hero-headline"
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'Cormorant Garant', serif",
               fontSize: "clamp(3.5rem, 7vw, 7rem)",
               fontWeight: 400,
               lineHeight: 1.05,
@@ -458,7 +460,7 @@ export default function LaurifyHomepage() {
               fontWeight: 400,
               letterSpacing: "0.05em",
               lineHeight: 1.9,
-              color: "rgba(237,227,211,0.75)",
+              color: "rgba(245,244,228,0.75)",
               marginTop: "1.8rem",
               maxWidth: "400px",
             }}
@@ -501,7 +503,7 @@ export default function LaurifyHomepage() {
               <div key={label}>
                 <div
                   style={{
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "'Cormorant Garant', serif",
                     fontSize: "2.2rem",
                     fontWeight: 400,
                     color: "var(--gold)",
@@ -516,7 +518,7 @@ export default function LaurifyHomepage() {
                     fontSize: "0.65rem",
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    color: "rgba(237,227,211,0.5)",
+                    color: "rgba(245,244,228,0.5)",
                     marginTop: "0.4rem",
                   }}
                 >
@@ -539,7 +541,7 @@ export default function LaurifyHomepage() {
             flexDirection: "column",
             alignItems: "center",
             gap: "0.5rem",
-            color: "rgba(237,227,211,0.4)",
+            color: "rgba(245,244,228,0.4)",
             fontSize: "0.6rem",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
@@ -551,7 +553,7 @@ export default function LaurifyHomepage() {
               width: "1px",
               height: "40px",
               background:
-                "linear-gradient(to bottom, rgba(237,227,211,0.4), transparent)",
+                "linear-gradient(to bottom, rgba(245,244,228,0.4), transparent)",
               animation: "float 2s ease-in-out infinite",
             }}
           />
@@ -572,7 +574,7 @@ export default function LaurifyHomepage() {
             <div className="divider divider-center" />
             <h2
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garant', serif",
                 fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -587,7 +589,7 @@ export default function LaurifyHomepage() {
               style={{
                 fontSize: "0.85rem",
                 fontWeight: 400,
-                color: "#5a6472",
+                color: "#605952",
                 marginTop: "1rem",
                 maxWidth: "440px",
                 margin: "1rem auto 0",
@@ -613,7 +615,7 @@ export default function LaurifyHomepage() {
                   <span className="card-icon">{service.icon}</span>
                   <h3
                     style={{
-                      fontFamily: "'Playfair Display', serif",
+                      fontFamily: "'Cormorant Garant', serif",
                       fontSize: "1.4rem",
                       fontWeight: 400,
                       marginBottom: "0.8rem",
@@ -639,7 +641,7 @@ export default function LaurifyHomepage() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      borderTop: "1px solid rgba(197,169,122,0.3)",
+                      borderTop: "1px solid rgba(227,212,190,0.3)",
                       paddingTop: "1rem",
                     }}
                   >
@@ -696,7 +698,7 @@ export default function LaurifyHomepage() {
             width: "600px",
             height: "600px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(197,169,122,0.06) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(227,212,190,0.06) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -719,7 +721,7 @@ export default function LaurifyHomepage() {
             <div className="divider" style={{ background: "var(--gold)" }} />
             <h2
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garant', serif",
                 fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -741,7 +743,7 @@ export default function LaurifyHomepage() {
                 fontSize: "0.85rem",
                 fontWeight: 400,
                 lineHeight: 1.95,
-                color: "rgba(237,227,211,0.65)",
+                color: "rgba(245,244,228,0.65)",
                 marginBottom: "1.2rem",
               }}
             >
@@ -753,7 +755,7 @@ export default function LaurifyHomepage() {
                 fontSize: "0.85rem",
                 fontWeight: 400,
                 lineHeight: 1.95,
-                color: "rgba(237,227,211,0.65)",
+                color: "rgba(245,244,228,0.65)",
                 marginBottom: "2.5rem",
               }}
             >
@@ -770,8 +772,8 @@ export default function LaurifyHomepage() {
             <div
               style={{
                 aspectRatio: "3/4",
-                background: "linear-gradient(135deg, #1A2E42 0%, #243347 100%)",
-                border: "1px solid rgba(197,169,122,0.25)",
+                background: "linear-gradient(135deg, #0A1F48 0%, #0D2454 100%)",
+                border: "1px solid rgba(227,212,190,0.25)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -784,23 +786,23 @@ export default function LaurifyHomepage() {
                 style={{
                   position: "absolute",
                   inset: "2rem",
-                  border: "1px solid rgba(197,169,122,0.15)",
+                  border: "1px solid rgba(227,212,190,0.15)",
                 }}
               />
               <div
                 style={{
                   position: "absolute",
                   inset: "3.5rem",
-                  border: "1px solid rgba(197,169,122,0.08)",
+                  border: "1px solid rgba(227,212,190,0.08)",
                 }}
               />
               <div style={{ textAlign: "center", padding: "2rem" }}>
                 <div
                   style={{
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "'Cormorant Garant', serif",
                     fontSize: "5rem",
                     fontWeight: 400,
-                    color: "rgba(197,169,122,0.3)",
+                    color: "rgba(227,212,190,0.3)",
                     lineHeight: 1,
                     marginBottom: "1rem",
                   }}
@@ -813,7 +815,7 @@ export default function LaurifyHomepage() {
                     fontSize: "0.65rem",
                     letterSpacing: "0.35em",
                     textTransform: "uppercase",
-                    color: "rgba(197,169,122,0.4)",
+                    color: "rgba(227,212,190,0.4)",
                   }}
                 >
                   Est. 2014 · Riga
@@ -834,7 +836,7 @@ export default function LaurifyHomepage() {
             >
               <div
                 style={{
-                  fontFamily: "'Playfair Display', serif",
+                  fontFamily: "'Cormorant Garant', serif",
                   fontSize: "2rem",
                   fontWeight: 400,
                   color: "var(--navy)",
@@ -878,10 +880,10 @@ export default function LaurifyHomepage() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "'Cormorant Garant', serif",
             fontSize: "clamp(10rem, 20vw, 24rem)",
             fontWeight: 400,
-            color: "rgba(13,27,42,0.03)",
+            color: "rgba(10,31,72,0.03)",
             pointerEvents: "none",
             userSelect: "none",
             lineHeight: 1,
@@ -895,7 +897,7 @@ export default function LaurifyHomepage() {
           <div className="divider divider-center" />
           <h2
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'Cormorant Garant', serif",
               fontSize: "clamp(2rem, 3.5vw, 3rem)",
               fontWeight: 400,
               fontStyle: "italic",
@@ -917,7 +919,7 @@ export default function LaurifyHomepage() {
           >
             <p
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garant', serif",
                 fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -940,7 +942,7 @@ export default function LaurifyHomepage() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garant', serif",
                 fontSize: "0.85rem",
                 color: "var(--gold)",
                 marginBottom: "0.8rem",
@@ -950,7 +952,7 @@ export default function LaurifyHomepage() {
             </div>
             <div
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garant', serif",
                 fontSize: "1.05rem",
                 fontWeight: 500,
                 color: "var(--navy)",
@@ -964,7 +966,7 @@ export default function LaurifyHomepage() {
                 fontSize: "0.7rem",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "#7a8490",
+                color: "#605952",
                 marginTop: "0.3rem",
               }}
             >
@@ -1006,7 +1008,7 @@ export default function LaurifyHomepage() {
             <div className="divider divider-center" />
             <h2
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garant', serif",
                 fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -1029,7 +1031,7 @@ export default function LaurifyHomepage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "'Playfair Display', serif",
+                  fontFamily: "'Cormorant Garant', serif",
                   fontSize: "1.6rem",
                   fontWeight: 400,
                   color: "var(--navy)",
@@ -1079,7 +1081,7 @@ export default function LaurifyHomepage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "'Playfair Display', serif",
+                  fontFamily: "'Cormorant Garant', serif",
                   fontSize: "1.6rem",
                   fontWeight: 400,
                   color: "var(--navy)",
@@ -1101,9 +1103,9 @@ export default function LaurifyHomepage() {
                   padding: "0.9rem 1rem",
                   border: "1px solid var(--beige-mid)",
                   background: "transparent",
-                  fontFamily: "'Raleway', sans-serif",
+                  fontFamily: "'Jost', sans-serif",
                   fontSize: "0.85rem",
-                  color: "#5a6472",
+                  color: "#605952",
                   outline: "none",
                   marginBottom: "1rem",
                   appearance: "none",
@@ -1130,7 +1132,7 @@ export default function LaurifyHomepage() {
         style={{
           background: "var(--navy)",
           padding: "4rem 3rem",
-          borderTop: "1px solid rgba(197,169,122,0.15)",
+          borderTop: "1px solid rgba(227,212,190,0.15)",
         }}
       >
         <div
@@ -1146,7 +1148,7 @@ export default function LaurifyHomepage() {
           <div>
             <div
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garant', serif",
                 fontSize: "1.8rem",
                 fontWeight: 700,
                 letterSpacing: "0.12em",
@@ -1162,7 +1164,7 @@ export default function LaurifyHomepage() {
                 fontSize: "0.78rem",
                 fontWeight: 400,
                 lineHeight: 1.9,
-                color: "rgba(237,227,211,0.45)",
+                color: "rgba(245,244,228,0.45)",
                 maxWidth: "220px",
               }}
             >
@@ -1192,12 +1194,12 @@ export default function LaurifyHomepage() {
                     style={{
                       fontSize: "0.78rem",
                       fontWeight: 400,
-                      color: "rgba(237,227,211,0.45)",
+                      color: "rgba(245,244,228,0.45)",
                       textDecoration: "none",
                       transition: "color 0.3s",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(237,227,211,0.45)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,244,228,0.45)")}
                   >
                     {link}
                   </a>
@@ -1212,7 +1214,7 @@ export default function LaurifyHomepage() {
             maxWidth: "1200px",
             margin: "3rem auto 0",
             paddingTop: "2rem",
-            borderTop: "1px solid rgba(197,169,122,0.1)",
+            borderTop: "1px solid rgba(227,212,190,0.1)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -1225,7 +1227,7 @@ export default function LaurifyHomepage() {
             style={{
               fontSize: "0.68rem",
               letterSpacing: "0.1em",
-              color: "rgba(237,227,211,0.3)",
+              color: "rgba(245,244,228,0.3)",
             }}
           >
             {dict.footer.copyright}
@@ -1235,7 +1237,7 @@ export default function LaurifyHomepage() {
             style={{
               fontSize: "0.68rem",
               letterSpacing: "0.1em",
-              color: "rgba(237,227,211,0.3)",
+              color: "rgba(245,244,228,0.3)",
             }}
           >
             {dict.footer.legal}
