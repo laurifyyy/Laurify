@@ -214,7 +214,7 @@ export default function LaurifyHomepage() {
         .service-card:hover .card-content { color: var(--cream); }
         .service-card:hover .card-price { color: var(--gold-light); }
         .service-card:hover .card-icon { color: var(--gold); }
-        .card-content { transition: color 0.4s; }
+        .card-content { transition: color 0.4s; display: flex; flex-direction: column; height: 100%; }
         .card-icon { font-size: 1.2rem; color: var(--gold); margin-bottom: 1.2rem; display: block; transition: color 0.4s; }
         .card-price { transition: color 0.4s; }
 
@@ -657,10 +657,12 @@ export default function LaurifyHomepage() {
                   <span className="card-icon">{service.icon}</span>
                   <h3
                     style={{
-                      fontFamily: "'La Luxes Serif', serif",
-                      fontSize: "1.4rem",
-                      fontWeight: 400,
-                      marginBottom: "0.8rem",
+                      fontFamily: "'Gabriel Sans', sans-serif",
+                      fontSize: "0.8rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      marginBottom: "1rem",
                     }}
                   >
                     {service.title}
@@ -669,11 +671,11 @@ export default function LaurifyHomepage() {
                     className="sans"
                     style={{
                       fontSize: "0.8rem",
-                      fontWeight: 400,
+                      fontWeight: 300,
                       lineHeight: 1.8,
                       color: "inherit",
                       opacity: 0.7,
-                      marginBottom: "1.5rem",
+                      flexGrow: 1,
                     }}
                   >
                     {service.description}
@@ -685,14 +687,17 @@ export default function LaurifyHomepage() {
                       alignItems: "center",
                       borderTop: "1px solid rgba(227,212,190,0.3)",
                       paddingTop: "1rem",
+                      marginTop: "1.5rem",
                     }}
                   >
                     <span
                       className="sans card-price"
                       style={{
-                        fontSize: "1.1rem",
-                        fontWeight: 400,
-                        color: "var(--gold)",
+                        fontFamily: "'Gabriel Sans', sans-serif",
+                        fontSize: "1rem",
+                        fontWeight: 500,
+                        letterSpacing: "0.05em",
+                        color: "var(--taupe)",
                       }}
                     >
                       {service.price}
