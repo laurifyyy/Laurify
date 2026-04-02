@@ -164,6 +164,7 @@ export default function LaurifyHomepage() {
           transition: all 0.4s ease;
           position: relative;
           overflow: hidden;
+          border-radius: 16px;
         }
         .service-card::before {
           content: '';
@@ -613,8 +614,8 @@ export default function LaurifyHomepage() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "1.5px",
-              background: "var(--beige-mid)",
+              gap: "1.5rem",
+              background: "transparent",
             }}
           >
             {services.map((service) => (
