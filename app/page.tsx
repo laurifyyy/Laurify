@@ -56,14 +56,22 @@ export default function LaurifyHomepage() {
   return (
     <div
       style={{
-        fontFamily: "'Cormorant Garant', Georgia, serif",
+        fontFamily: "'La Luxes Serif', Georgia, serif",
         backgroundColor: "var(--cream)",
         color: "var(--dark)",
         overflowX: "hidden",
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap');
+
+        @font-face {
+          font-family: 'La Luxes Serif';
+          src: url('/LaLuxes-regular.otf') format('opentype');
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -284,7 +292,7 @@ export default function LaurifyHomepage() {
       >
         <div
           style={{
-            fontFamily: "'Cormorant Garant', serif",
+            fontFamily: "'La Luxes Serif', serif",
             fontSize: "1.8rem",
             fontWeight: 700,
             letterSpacing: "0.12em",
@@ -407,7 +415,7 @@ export default function LaurifyHomepage() {
             right: "8%",
             top: "50%",
             transform: "translateY(-50%)",
-            fontFamily: "'Cormorant Garant', serif",
+            fontFamily: "'La Luxes Serif', serif",
             fontSize: "clamp(12rem, 18vw, 22rem)",
             fontWeight: 400,
             color: "rgba(227,212,190,0.06)",
@@ -436,7 +444,7 @@ export default function LaurifyHomepage() {
           <h1
             className="hero-animate-delay hero-headline"
             style={{
-              fontFamily: "'Cormorant Garant', serif",
+              fontFamily: "'La Luxes Serif', serif",
               fontSize: "clamp(3.5rem, 7vw, 7rem)",
               fontWeight: 400,
               lineHeight: 1.05,
@@ -503,7 +511,7 @@ export default function LaurifyHomepage() {
               <div key={label}>
                 <div
                   style={{
-                    fontFamily: "'Cormorant Garant', serif",
+                    fontFamily: "'La Luxes Serif', serif",
                     fontSize: "2.2rem",
                     fontWeight: 400,
                     color: "var(--gold)",
@@ -574,7 +582,7 @@ export default function LaurifyHomepage() {
             <div className="divider divider-center" />
             <h2
               style={{
-                fontFamily: "'Cormorant Garant', serif",
+                fontFamily: "'La Luxes Serif', serif",
                 fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -615,7 +623,7 @@ export default function LaurifyHomepage() {
                   <span className="card-icon">{service.icon}</span>
                   <h3
                     style={{
-                      fontFamily: "'Cormorant Garant', serif",
+                      fontFamily: "'La Luxes Serif', serif",
                       fontSize: "1.4rem",
                       fontWeight: 400,
                       marginBottom: "0.8rem",
@@ -721,7 +729,7 @@ export default function LaurifyHomepage() {
             <div className="divider" style={{ background: "var(--gold)" }} />
             <h2
               style={{
-                fontFamily: "'Cormorant Garant', serif",
+                fontFamily: "'La Luxes Serif', serif",
                 fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -799,7 +807,7 @@ export default function LaurifyHomepage() {
               <div style={{ textAlign: "center", padding: "2rem" }}>
                 <div
                   style={{
-                    fontFamily: "'Cormorant Garant', serif",
+                    fontFamily: "'La Luxes Serif', serif",
                     fontSize: "5rem",
                     fontWeight: 400,
                     color: "rgba(227,212,190,0.3)",
@@ -836,7 +844,7 @@ export default function LaurifyHomepage() {
             >
               <div
                 style={{
-                  fontFamily: "'Cormorant Garant', serif",
+                  fontFamily: "'La Luxes Serif', serif",
                   fontSize: "2rem",
                   fontWeight: 400,
                   color: "var(--navy)",
@@ -880,7 +888,7 @@ export default function LaurifyHomepage() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            fontFamily: "'Cormorant Garant', serif",
+            fontFamily: "'La Luxes Serif', serif",
             fontSize: "clamp(10rem, 20vw, 24rem)",
             fontWeight: 400,
             color: "rgba(10,31,72,0.03)",
@@ -897,7 +905,7 @@ export default function LaurifyHomepage() {
           <div className="divider divider-center" />
           <h2
             style={{
-              fontFamily: "'Cormorant Garant', serif",
+              fontFamily: "'La Luxes Serif', serif",
               fontSize: "clamp(2rem, 3.5vw, 3rem)",
               fontWeight: 400,
               fontStyle: "italic",
@@ -919,7 +927,7 @@ export default function LaurifyHomepage() {
           >
             <p
               style={{
-                fontFamily: "'Cormorant Garant', serif",
+                fontFamily: "'La Luxes Serif', serif",
                 fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -942,7 +950,7 @@ export default function LaurifyHomepage() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: "'Cormorant Garant', serif",
+                fontFamily: "'La Luxes Serif', serif",
                 fontSize: "0.85rem",
                 color: "var(--gold)",
                 marginBottom: "0.8rem",
@@ -952,7 +960,7 @@ export default function LaurifyHomepage() {
             </div>
             <div
               style={{
-                fontFamily: "'Cormorant Garant', serif",
+                fontFamily: "'La Luxes Serif', serif",
                 fontSize: "1.05rem",
                 fontWeight: 500,
                 color: "var(--navy)",
@@ -1008,7 +1016,7 @@ export default function LaurifyHomepage() {
             <div className="divider divider-center" />
             <h2
               style={{
-                fontFamily: "'Cormorant Garant', serif",
+                fontFamily: "'La Luxes Serif', serif",
                 fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -1031,7 +1039,7 @@ export default function LaurifyHomepage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "'Cormorant Garant', serif",
+                  fontFamily: "'La Luxes Serif', serif",
                   fontSize: "1.6rem",
                   fontWeight: 400,
                   color: "var(--navy)",
@@ -1081,7 +1089,7 @@ export default function LaurifyHomepage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "'Cormorant Garant', serif",
+                  fontFamily: "'La Luxes Serif', serif",
                   fontSize: "1.6rem",
                   fontWeight: 400,
                   color: "var(--navy)",
@@ -1148,7 +1156,7 @@ export default function LaurifyHomepage() {
           <div>
             <div
               style={{
-                fontFamily: "'Cormorant Garant', serif",
+                fontFamily: "'La Luxes Serif', serif",
                 fontSize: "1.8rem",
                 fontWeight: 700,
                 letterSpacing: "0.12em",
