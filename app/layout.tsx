@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RF Lifting | Laurify",
+  title: "Laurify | RF Lifting",
   description: "Luxury RF lifting treatments in Riga. Experience premium beauty care.",
 };
 
