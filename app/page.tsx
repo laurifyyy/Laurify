@@ -1,87 +1,24 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { dictionaries, type Lang } from "./i18n";
 
-const services = [
-  {
-    title: "Signature Facial",
-    description:
-      "A bespoke treatment tailored to your skin's unique needs, using rare botanical extracts and gold-infused serums.",
-    duration: "90 min",
-    price: "€185",
-    icon: "✦",
-  },
-  {
-    title: "Precision Hair Artistry",
-    description:
-      "Cut, color, and style curated by our master colorists trained in Parisian ateliers.",
-    duration: "120 min",
-    price: "€240",
-    icon: "✦",
-  },
-  {
-    title: "Ritual Body Sculpt",
-    description:
-      "A full-body contouring experience combining deep-tissue techniques with warm amber oil therapy.",
-    duration: "75 min",
-    price: "€160",
-    icon: "✦",
-  },
-  {
-    title: "Lash & Brow Design",
-    description:
-      "Architectural precision meets softness — defining your gaze with an artist's eye.",
-    duration: "60 min",
-    price: "€95",
-    icon: "✦",
-  },
-  {
-    title: "Bridal Atelier",
-    description:
-      "An all-day luxury preparation ritual for your most important chapter, tailored from first consultation to final veil.",
-    duration: "Full Day",
-    price: "€890",
-    icon: "✦",
-  },
-  {
-    title: "The Laurify Ritual",
-    description:
-      "Our signature three-hour immersive experience — face, body, and spirit restored in sequence.",
-    duration: "180 min",
-    price: "€380",
-    icon: "✦",
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      "Laurify is unlike any salon I have visited in Europe. The quiet luxury, the attention to every micro-detail — I felt sculpted, not just styled.",
-    name: "Isabelle M.",
-    role: "Fashion Director, Paris",
-    initials: "IM",
-  },
-  {
-    quote:
-      "My skin has never looked this way before. The Signature Facial changed how I understand self-care. I will not go anywhere else.",
-    name: "Elara V.",
-    role: "Entrepreneur, Riga",
-    initials: "EV",
-  },
-  {
-    quote:
-      "From the moment I walked in, everything was considered. The scent, the light, the touch. This is what true luxury feels like.",
-    name: "Natasha R.",
-    role: "Interior Designer, Stockholm",
-    initials: "NR",
-  },
-];
+const SERVICE_PRICES = ["€185", "€240", "€160", "€95", "€890", "€380"];
 
 export default function LaurifyHomepage() {
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [lang, setLang] = useState<Lang>("en");
   const heroRef = useRef<HTMLDivElement>(null);
+
+  const dict = dictionaries[lang];
+  const services = dict.services.items.map((item, i) => ({
+    ...item,
+    price: SERVICE_PRICES[i],
+    icon: "✦",
+  }));
+  const testimonials = dict.testimonials.items;
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -94,41 +31,59 @@ export default function LaurifyHomepage() {
       setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
+
+  useEffect(() => {
+    setActiveTestimonial(0);
+  }, [lang]);
 
   const navScrolled = scrollY > 60;
+
+  const navLinks = [
+    { label: dict.nav.services, href: "#services" },
+    { label: dict.nav.about, href: "#about" },
+    { label: dict.nav.testimonials, href: "#testimonials" },
+    { label: dict.nav.contact, href: "#contact" },
+  ];
+
+  const contactInfo = [
+    { label: dict.contact.address, value: "12 Elizabetes iela, Riga, LV-1010" },
+    { label: dict.contact.phone, value: "+371 67 123 456" },
+    { label: dict.contact.email, value: "hello@laurify.com" },
+    { label: dict.contact.hours, value: dict.contact.hoursValue },
+  ];
 
   return (
     <div
       style={{
-        fontFamily: "'Cormorant Garamond', Georgia, serif",
-        backgroundColor: "#FDFAF6",
-        color: "#0D1B2A",
+        fontFamily: "'Playfair Display', Georgia, serif",
+        backgroundColor: "var(--cream)",
+        color: "#1B2A4A",
         overflowX: "hidden",
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@200;300;400;500&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-          --cream: #FDFAF6;
-          --beige: #EDE3D3;
-          --beige-mid: #D6C9B6;
-          --navy: #0D1B2A;
-          --navy-mid: #1A2E42;
-          --gold: #C5A97A;
-          --gold-light: #E8D5B0;
+          --cream: #F2EDDE;
+          --beige: #E8E0CC;
+          --beige-mid: #D0C5AD;
+          --navy: #1B2A4A;
+          --navy-mid: #243356;
+          --gold: #B8975A;
+          --gold-light: #DFC99A;
           --white: #FFFFFF;
         }
 
         html { scroll-behavior: smooth; }
 
-        .sans { font-family: 'Jost', sans-serif; }
+        .sans { font-family: 'Raleway', sans-serif; }
 
         .nav-link {
-          font-family: 'Jost', sans-serif;
+          font-family: 'Raleway', sans-serif;
           font-weight: 300;
           font-size: 0.75rem;
           letter-spacing: 0.2em;
@@ -142,7 +97,7 @@ export default function LaurifyHomepage() {
 
         .btn-primary {
           display: inline-block;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Raleway', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -163,7 +118,7 @@ export default function LaurifyHomepage() {
 
         .btn-outline {
           display: inline-block;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Raleway', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -183,7 +138,7 @@ export default function LaurifyHomepage() {
 
         .btn-light {
           display: inline-block;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Raleway', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -274,6 +229,23 @@ export default function LaurifyHomepage() {
 
         .ornament { color: var(--gold); letter-spacing: 0.15em; font-size: 0.7rem; }
 
+        .lang-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-family: 'Raleway', sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          padding: 0.25rem 0.2rem;
+          transition: color 0.3s;
+        }
+        .lang-sep {
+          font-family: 'Raleway', sans-serif;
+          font-size: 0.55rem;
+          opacity: 0.3;
+        }
+
         @media (max-width: 768px) {
           .hero-headline { font-size: 3rem !important; }
           .services-grid { grid-template-columns: 1fr !important; }
@@ -288,7 +260,7 @@ export default function LaurifyHomepage() {
           padding: 0.9rem 1rem;
           border: 1px solid var(--beige-mid);
           background: transparent;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Raleway', sans-serif;
           font-size: 0.85rem;
           color: var(--navy);
           outline: none;
@@ -320,10 +292,10 @@ export default function LaurifyHomepage() {
       >
         <div
           style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "1.6rem",
-            fontWeight: 300,
-            letterSpacing: "0.15em",
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "1.8rem",
+            fontWeight: 700,
+            letterSpacing: "0.12em",
             color: navScrolled ? "var(--navy)" : "var(--cream)",
           }}
         >
@@ -334,16 +306,40 @@ export default function LaurifyHomepage() {
           className="mobile-hidden"
           style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}
         >
-          {["Services", "About", "Testimonials", "Contact"].map((item) => (
+          {navLinks.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.href}
+              href={item.href}
               className="nav-link"
               style={{ color: navScrolled ? "var(--navy)" : "var(--cream)" }}
             >
-              {item}
+              {item.label}
             </a>
           ))}
+
+          {/* Language switcher */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.1rem" }}>
+            {(["lv", "en", "ru"] as const).map((l, i) => (
+              <span key={l} style={{ display: "flex", alignItems: "center" }}>
+                {i > 0 && <span className="lang-sep" style={{ color: navScrolled ? "var(--navy)" : "var(--cream)" }}>|</span>}
+                <button
+                  className="lang-btn"
+                  onClick={() => setLang(l)}
+                  style={{
+                    color: lang === l
+                      ? "var(--gold)"
+                      : navScrolled
+                      ? "var(--navy)"
+                      : "rgba(237,227,211,0.6)",
+                    fontWeight: lang === l ? 500 : 300,
+                  }}
+                >
+                  {l.toUpperCase()}
+                </button>
+              </span>
+            ))}
+          </div>
+
           <a
             href="#contact"
             className="nav-link"
@@ -353,7 +349,7 @@ export default function LaurifyHomepage() {
               padding: "0.55rem 1.4rem",
             }}
           >
-            Book Now
+            {dict.nav.bookNow}
           </a>
         </div>
 
@@ -419,9 +415,9 @@ export default function LaurifyHomepage() {
             right: "8%",
             top: "50%",
             transform: "translateY(-50%)",
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: "'Playfair Display', serif",
             fontSize: "clamp(12rem, 18vw, 22rem)",
-            fontWeight: 300,
+            fontWeight: 400,
             color: "rgba(197,169,122,0.06)",
             lineHeight: 1,
             userSelect: "none",
@@ -441,16 +437,16 @@ export default function LaurifyHomepage() {
             paddingBottom: "6rem",
           }}
         >
-          <div className="hero-animate ornament sans" style={{ color: "var(--gold)" }}>
-            ✦ &nbsp; Luxury Beauty Atelier &nbsp; ✦
+          <div className="hero-animate ornament sans" style={{ color: "var(--gold)", fontStyle: "italic", letterSpacing: "0.08em", fontSize: "0.85rem", fontWeight: 300 }}>
+            {dict.hero.tagline}
           </div>
 
           <h1
             className="hero-animate-delay hero-headline"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(3.5rem, 7vw, 7rem)",
-              fontWeight: 300,
+              fontWeight: 400,
               lineHeight: 1.05,
               color: "var(--cream)",
               marginTop: "1.5rem",
@@ -458,10 +454,10 @@ export default function LaurifyHomepage() {
               fontStyle: "italic",
             }}
           >
-            Where Beauty
+            {dict.hero.headline1}
             <br />
             <span style={{ fontStyle: "normal", fontWeight: 500 }}>
-              Becomes Art
+              {dict.hero.headline2}
             </span>
           </h1>
 
@@ -469,7 +465,7 @@ export default function LaurifyHomepage() {
             className="hero-animate-delay-2 sans"
             style={{
               fontSize: "0.9rem",
-              fontWeight: 300,
+              fontWeight: 400,
               letterSpacing: "0.05em",
               lineHeight: 1.9,
               color: "rgba(237,227,211,0.75)",
@@ -477,8 +473,7 @@ export default function LaurifyHomepage() {
               maxWidth: "400px",
             }}
           >
-            An intimate sanctuary where every ritual is composed with intention.
-            Experience beauty redefined through precision, care, and artistry.
+            {dict.hero.subtext}
           </p>
 
           <div
@@ -491,10 +486,10 @@ export default function LaurifyHomepage() {
             }}
           >
             <a href="#contact" className="btn-primary">
-              Reserve Your Visit
+              {dict.hero.cta1}
             </a>
             <a href="#services" className="btn-light">
-              Explore Services
+              {dict.hero.cta2}
             </a>
           </div>
 
@@ -509,16 +504,16 @@ export default function LaurifyHomepage() {
             }}
           >
             {[
-              ["10+", "Years of Artistry"],
-              ["2,400+", "Clients Served"],
-              ["4.98", "Average Rating"],
+              ["10+", dict.hero.stat1],
+              ["2,400+", dict.hero.stat2],
+              ["4.98", dict.hero.stat3],
             ].map(([num, label]) => (
               <div key={label}>
                 <div
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
+                    fontFamily: "'Playfair Display', serif",
                     fontSize: "2.2rem",
-                    fontWeight: 300,
+                    fontWeight: 400,
                     color: "var(--gold)",
                     lineHeight: 1,
                   }}
@@ -560,7 +555,7 @@ export default function LaurifyHomepage() {
             textTransform: "uppercase",
           }}
         >
-          <span>Scroll</span>
+          <span>{dict.hero.scroll}</span>
           <div
             style={{
               width: "1px",
@@ -583,25 +578,25 @@ export default function LaurifyHomepage() {
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "5rem" }}>
-            <div className="ornament sans">✦ &nbsp; Our Offerings &nbsp; ✦</div>
+            <div className="ornament sans">✦ &nbsp; {dict.services.ornament} &nbsp; ✦</div>
             <div className="divider divider-center" />
             <h2
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-                fontWeight: 300,
+                fontWeight: 400,
                 fontStyle: "italic",
                 lineHeight: 1.15,
                 color: "var(--navy)",
               }}
             >
-              Curated Services
+              {dict.services.title}
             </h2>
             <p
               className="sans"
               style={{
                 fontSize: "0.85rem",
-                fontWeight: 300,
+                fontWeight: 400,
                 color: "#5a6472",
                 marginTop: "1rem",
                 maxWidth: "440px",
@@ -609,7 +604,7 @@ export default function LaurifyHomepage() {
                 lineHeight: 1.8,
               }}
             >
-              Each treatment is a considered experience — from the first touch to the final flourish.
+              {dict.services.subtitle}
             </p>
           </div>
 
@@ -628,7 +623,7 @@ export default function LaurifyHomepage() {
                   <span className="card-icon">{service.icon}</span>
                   <h3
                     style={{
-                      fontFamily: "'Cormorant Garamond', serif",
+                      fontFamily: "'Playfair Display', serif",
                       fontSize: "1.4rem",
                       fontWeight: 400,
                       marginBottom: "0.8rem",
@@ -640,7 +635,7 @@ export default function LaurifyHomepage() {
                     className="sans"
                     style={{
                       fontSize: "0.8rem",
-                      fontWeight: 300,
+                      fontWeight: 400,
                       lineHeight: 1.8,
                       color: "inherit",
                       opacity: 0.7,
@@ -662,7 +657,7 @@ export default function LaurifyHomepage() {
                       className="sans card-price"
                       style={{
                         fontSize: "1.1rem",
-                        fontWeight: 300,
+                        fontWeight: 400,
                         color: "var(--gold)",
                       }}
                     >
@@ -687,7 +682,7 @@ export default function LaurifyHomepage() {
 
           <div style={{ textAlign: "center", marginTop: "3rem" }}>
             <a href="#contact" className="btn-outline">
-              Book a Treatment
+              {dict.services.bookBtn}
             </a>
           </div>
         </div>
@@ -729,24 +724,24 @@ export default function LaurifyHomepage() {
         >
           <div>
             <div className="ornament sans" style={{ color: "var(--gold)" }}>
-              ✦ &nbsp; Our Philosophy &nbsp; ✦
+              ✦ &nbsp; {dict.about.ornament} &nbsp; ✦
             </div>
             <div className="divider" style={{ background: "var(--gold)" }} />
             <h2
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
-                fontWeight: 300,
+                fontWeight: 400,
                 fontStyle: "italic",
                 lineHeight: 1.2,
                 color: "var(--cream)",
                 marginBottom: "1.8rem",
               }}
             >
-              Beauty as a
+              {dict.about.headline1}
               <br />
               <span style={{ fontStyle: "normal", fontWeight: 500 }}>
-                Daily Ceremony
+                {dict.about.headline2}
               </span>
             </h2>
 
@@ -754,34 +749,29 @@ export default function LaurifyHomepage() {
               className="sans"
               style={{
                 fontSize: "0.85rem",
-                fontWeight: 300,
+                fontWeight: 400,
                 lineHeight: 1.95,
                 color: "rgba(237,227,211,0.65)",
                 marginBottom: "1.2rem",
               }}
             >
-              Laurify was founded on the belief that beauty is not a correction —
-              it is a revelation. Our atelier was created as a counterpoint to
-              the rushed, transactional salon experience. Here, time slows.
+              {dict.about.p1}
             </p>
             <p
               className="sans"
               style={{
                 fontSize: "0.85rem",
-                fontWeight: 300,
+                fontWeight: 400,
                 lineHeight: 1.95,
                 color: "rgba(237,227,211,0.65)",
                 marginBottom: "2.5rem",
               }}
             >
-              Each practitioner holds a minimum of 8 years of specialist
-              training. We source only the finest European and botanical
-              ingredients, and every appointment is preceded by a personal
-              consultation.
+              {dict.about.p2}
             </p>
 
             <a href="#contact" className="btn-light">
-              Our Story
+              {dict.about.cta}
             </a>
           </div>
 
@@ -817,9 +807,9 @@ export default function LaurifyHomepage() {
               <div style={{ textAlign: "center", padding: "2rem" }}>
                 <div
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
+                    fontFamily: "'Playfair Display', serif",
                     fontSize: "5rem",
-                    fontWeight: 300,
+                    fontWeight: 400,
                     color: "rgba(197,169,122,0.3)",
                     lineHeight: 1,
                     marginBottom: "1rem",
@@ -854,9 +844,9 @@ export default function LaurifyHomepage() {
             >
               <div
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Playfair Display', serif",
                   fontSize: "2rem",
-                  fontWeight: 300,
+                  fontWeight: 400,
                   color: "var(--navy)",
                   lineHeight: 1,
                 }}
@@ -874,7 +864,7 @@ export default function LaurifyHomepage() {
                   opacity: 0.75,
                 }}
               >
-                Natural Botanicals
+                {dict.about.tag}
               </div>
             </div>
           </div>
@@ -898,9 +888,9 @@ export default function LaurifyHomepage() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: "'Playfair Display', serif",
             fontSize: "clamp(10rem, 20vw, 24rem)",
-            fontWeight: 300,
+            fontWeight: 400,
             color: "rgba(13,27,42,0.03)",
             pointerEvents: "none",
             userSelect: "none",
@@ -911,19 +901,19 @@ export default function LaurifyHomepage() {
         </div>
 
         <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative" }}>
-          <div className="ornament sans">✦ &nbsp; Client Words &nbsp; ✦</div>
+          <div className="ornament sans">✦ &nbsp; {dict.testimonials.ornament} &nbsp; ✦</div>
           <div className="divider divider-center" />
           <h2
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              fontWeight: 300,
+              fontWeight: 400,
               fontStyle: "italic",
               color: "var(--navy)",
               marginBottom: "4rem",
             }}
           >
-            What Our Guests Say
+            {dict.testimonials.title}
           </h2>
 
           <div
@@ -937,16 +927,16 @@ export default function LaurifyHomepage() {
           >
             <p
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)",
-                fontWeight: 300,
+                fontWeight: 400,
                 fontStyle: "italic",
                 lineHeight: 1.6,
                 color: "var(--navy)",
                 transition: "all 0.6s ease",
               }}
             >
-              "{testimonials[activeTestimonial].quote}"
+              &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
             </p>
           </div>
 
@@ -960,7 +950,7 @@ export default function LaurifyHomepage() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "0.85rem",
                 color: "var(--gold)",
                 marginBottom: "0.8rem",
@@ -970,7 +960,7 @@ export default function LaurifyHomepage() {
             </div>
             <div
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "1.05rem",
                 fontWeight: 500,
                 color: "var(--navy)",
@@ -1022,18 +1012,18 @@ export default function LaurifyHomepage() {
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "5rem" }}>
-            <div className="ornament sans">✦ &nbsp; Reserve Your Visit &nbsp; ✦</div>
+            <div className="ornament sans">✦ &nbsp; {dict.contact.ornament} &nbsp; ✦</div>
             <div className="divider divider-center" />
             <h2
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-                fontWeight: 300,
+                fontWeight: 400,
                 fontStyle: "italic",
                 color: "var(--navy)",
               }}
             >
-              Begin Your Ritual
+              {dict.contact.title}
             </h2>
           </div>
 
@@ -1049,28 +1039,17 @@ export default function LaurifyHomepage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Playfair Display', serif",
                   fontSize: "1.6rem",
                   fontWeight: 400,
                   color: "var(--navy)",
                   marginBottom: "1.5rem",
                 }}
               >
-                Contact & Hours
+                {dict.contact.infoTitle}
               </h3>
 
-              {[
-                {
-                  label: "Address",
-                  value: "12 Elizabetes iela, Riga, LV-1010",
-                },
-                { label: "Phone", value: "+371 67 123 456" },
-                { label: "Email", value: "hello@laurify.com" },
-                {
-                  label: "Hours",
-                  value: "Mon–Sat: 9:00–20:00\nSun: 10:00–17:00",
-                },
-              ].map(({ label, value }) => (
+              {contactInfo.map(({ label, value }) => (
                 <div
                   key={label}
                   style={{
@@ -1095,7 +1074,7 @@ export default function LaurifyHomepage() {
                     className="sans"
                     style={{
                       fontSize: "0.875rem",
-                      fontWeight: 300,
+                      fontWeight: 400,
                       color: "var(--navy)",
                       whiteSpace: "pre-line",
                       lineHeight: 1.7,
@@ -1110,29 +1089,29 @@ export default function LaurifyHomepage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'Playfair Display', serif",
                   fontSize: "1.6rem",
                   fontWeight: 400,
                   color: "var(--navy)",
                   marginBottom: "1.5rem",
                 }}
               >
-                Send a Message
+                {dict.contact.formTitle}
               </h3>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 1rem" }}>
-                <input type="text" placeholder="First Name" />
-                <input type="text" placeholder="Last Name" />
+                <input type="text" placeholder={dict.contact.firstName} />
+                <input type="text" placeholder={dict.contact.lastName} />
               </div>
-              <input type="email" placeholder="Email Address" />
-              <input type="tel" placeholder="Phone Number" />
+              <input type="email" placeholder={dict.contact.emailPlaceholder} />
+              <input type="tel" placeholder={dict.contact.phonePlaceholder} />
               <select
                 style={{
                   width: "100%",
                   padding: "0.9rem 1rem",
                   border: "1px solid var(--beige-mid)",
                   background: "transparent",
-                  fontFamily: "'Jost', sans-serif",
+                  fontFamily: "'Raleway', sans-serif",
                   fontSize: "0.85rem",
                   color: "#5a6472",
                   outline: "none",
@@ -1141,15 +1120,15 @@ export default function LaurifyHomepage() {
                   cursor: "pointer",
                 }}
               >
-                <option value="" disabled selected>Select a Service</option>
+                <option value="" disabled>{dict.contact.selectService}</option>
                 {services.map((s) => (
                   <option key={s.title} value={s.title}>{s.title}</option>
                 ))}
               </select>
-              <textarea placeholder="Any additional notes or requests..." />
+              <textarea placeholder={dict.contact.notes} />
 
               <button className="btn-primary" style={{ width: "100%", border: "none" }}>
-                Submit Request
+                {dict.contact.submitBtn}
               </button>
             </div>
           </div>
@@ -1177,10 +1156,10 @@ export default function LaurifyHomepage() {
           <div>
             <div
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "1.8rem",
-                fontWeight: 300,
-                letterSpacing: "0.15em",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
                 color: "var(--cream)",
                 marginBottom: "1rem",
               }}
@@ -1191,30 +1170,17 @@ export default function LaurifyHomepage() {
               className="sans"
               style={{
                 fontSize: "0.78rem",
-                fontWeight: 300,
+                fontWeight: 400,
                 lineHeight: 1.9,
                 color: "rgba(237,227,211,0.45)",
                 maxWidth: "220px",
               }}
             >
-              An intimate luxury beauty atelier in the heart of Riga. Beauty as a ceremony.
+              {dict.footer.tagline}
             </p>
           </div>
 
-          {[
-            {
-              title: "Services",
-              links: ["Signature Facial", "Hair Artistry", "Body Sculpt", "Bridal Atelier"],
-            },
-            {
-              title: "Atelier",
-              links: ["Our Story", "The Team", "Press", "Gift Cards"],
-            },
-            {
-              title: "Follow",
-              links: ["Instagram", "Pinterest", "LinkedIn", "Newsletter"],
-            },
-          ].map(({ title, links }) => (
+          {[dict.footer.col1, dict.footer.col2, dict.footer.col3].map(({ title, links }) => (
             <div key={title}>
               <div
                 className="sans"
@@ -1235,7 +1201,7 @@ export default function LaurifyHomepage() {
                     className="sans"
                     style={{
                       fontSize: "0.78rem",
-                      fontWeight: 300,
+                      fontWeight: 400,
                       color: "rgba(237,227,211,0.45)",
                       textDecoration: "none",
                       transition: "color 0.3s",
@@ -1272,7 +1238,7 @@ export default function LaurifyHomepage() {
               color: "rgba(237,227,211,0.3)",
             }}
           >
-            © 2026 Laurify. All rights reserved.
+            {dict.footer.copyright}
           </span>
           <span
             className="sans"
@@ -1282,7 +1248,7 @@ export default function LaurifyHomepage() {
               color: "rgba(237,227,211,0.3)",
             }}
           >
-            Privacy · Terms · Cookie Policy
+            {dict.footer.legal}
           </span>
         </div>
       </footer>
