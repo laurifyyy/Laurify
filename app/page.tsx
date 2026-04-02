@@ -355,7 +355,7 @@ export default function LaurifyHomepage() {
           <div style={{ display: "flex", alignItems: "center", gap: "0.1rem" }}>
             {(["lv", "en", "ru"] as const).map((l, i) => (
               <span key={l} style={{ display: "flex", alignItems: "center" }}>
-                {i > 0 && <span className="lang-sep" style={{ color: navScrolled ? "var(--navy)" : "var(--cream)" }}>|</span>}
+                {i > 0 && <span style={{ display: "inline-block", width: "1px", height: "10px", background: navScrolled ? "rgba(10,31,72,0.3)" : "rgba(245,244,228,0.3)", margin: "0 0.1rem" }} />}
                 <button
                   className="lang-btn"
                   onClick={() => setLang(l)}
