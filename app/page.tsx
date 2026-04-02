@@ -9,7 +9,7 @@ export default function LaurifyHomepage() {
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("lv");
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
