@@ -324,17 +324,20 @@ export default function LaurifyHomepage() {
           justifyContent: "space-between",
         }}
       >
-        <div
+        <a
+          href="#"
           style={{
             fontFamily: "'La Luxes Serif', serif",
             fontSize: "1.8rem",
             fontWeight: 700,
             letterSpacing: "0.12em",
             color: navScrolled ? "var(--navy)" : "var(--cream)",
+            textDecoration: "none",
+            cursor: "pointer",
           }}
         >
           LAURIFY
-        </div>
+        </a>
 
         <div
           className="mobile-hidden"
