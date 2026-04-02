@@ -166,22 +166,11 @@ export default function LaurifyHomepage() {
           overflow: hidden;
           border-radius: 16px;
         }
-        .service-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: rgba(27, 42, 74, 0.6);
-          transform: scaleY(0);
-          transform-origin: bottom;
-          transition: transform 0.5s ease;
-          z-index: 0;
-        }
-        .service-card:hover::before { transform: scaleY(1); }
-        .service-card:hover { border-color: var(--navy); }
+        .service-card:hover { border-color: var(--navy); background: var(--navy); }
         .service-card:hover .card-content { color: var(--cream); }
         .service-card:hover .card-price { color: var(--gold-light); }
         .service-card:hover .card-icon { color: var(--gold); }
-        .card-content { position: relative; z-index: 1; transition: color 0.4s; }
+        .card-content { transition: color 0.4s; }
         .card-icon { font-size: 1.2rem; color: var(--gold); margin-bottom: 1.2rem; display: block; transition: color 0.4s; }
         .card-price { transition: color 0.4s; }
 
