@@ -170,7 +170,7 @@ export default function LaurifyHomepage() {
           content: '';
           position: absolute;
           inset: 0;
-          background: var(--navy);
+          background: rgba(27, 42, 74, 0.6);
           transform: scaleY(0);
           transform-origin: bottom;
           transition: transform 0.5s ease;
