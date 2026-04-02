@@ -56,19 +56,53 @@ export default function LaurifyHomepage() {
   return (
     <div
       style={{
-        fontFamily: "'La Luxes Serif', Georgia, serif",
+        fontFamily: "'Gabriel Sans', sans-serif",
         backgroundColor: "var(--cream)",
         color: "var(--dark)",
         overflowX: "hidden",
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap');
-
         @font-face {
           font-family: 'La Luxes Serif';
           src: url('/LaLuxes-regular.otf') format('opentype');
           font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'Gabriel Sans';
+          src: url('/fonts/GabrielSans-Trial-Thin.woff') format('woff');
+          font-weight: 200;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: 'Gabriel Sans';
+          src: url('/fonts/GabrielSans-Trial-Light.woff') format('woff');
+          font-weight: 300;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: 'Gabriel Sans';
+          src: url('/fonts/GabrielSans-Trial-Normal.woff') format('woff');
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: 'Gabriel Sans';
+          src: url('/fonts/GabrielSans-Trial-Medium.woff') format('woff');
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: 'Gabriel Sans';
+          src: url('/fonts/GabrielSans-Trial-Bold.woff') format('woff');
+          font-weight: 700;
           font-style: normal;
           font-display: swap;
         }
@@ -90,10 +124,10 @@ export default function LaurifyHomepage() {
 
         html { scroll-behavior: smooth; }
 
-        .sans { font-family: 'Jost', sans-serif; }
+        .sans { font-family: 'Gabriel Sans', sans-serif; }
 
         .nav-link {
-          font-family: 'Jost', sans-serif;
+          font-family: 'Gabriel Sans', sans-serif;
           font-weight: 300;
           font-size: 0.75rem;
           letter-spacing: 0.2em;
@@ -107,7 +141,7 @@ export default function LaurifyHomepage() {
 
         .btn-primary {
           display: inline-block;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Gabriel Sans', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -128,7 +162,7 @@ export default function LaurifyHomepage() {
 
         .btn-outline {
           display: inline-block;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Gabriel Sans', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -148,7 +182,7 @@ export default function LaurifyHomepage() {
 
         .btn-light {
           display: inline-block;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Gabriel Sans', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -233,7 +267,7 @@ export default function LaurifyHomepage() {
           background: none;
           border: none;
           cursor: pointer;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Gabriel Sans', sans-serif;
           font-size: 0.65rem;
           letter-spacing: 0.15em;
           text-transform: uppercase;
@@ -241,7 +275,7 @@ export default function LaurifyHomepage() {
           transition: color 0.3s;
         }
         .lang-sep {
-          font-family: 'Jost', sans-serif;
+          font-family: 'Gabriel Sans', sans-serif;
           font-size: 0.55rem;
           opacity: 0.3;
         }
@@ -260,7 +294,7 @@ export default function LaurifyHomepage() {
           padding: 0.9rem 1rem;
           border: 1px solid var(--beige-mid);
           background: transparent;
-          font-family: 'Jost', sans-serif;
+          font-family: 'Gabriel Sans', sans-serif;
           font-size: 0.85rem;
           color: var(--navy);
           outline: none;
@@ -1111,7 +1145,7 @@ export default function LaurifyHomepage() {
                   padding: "0.9rem 1rem",
                   border: "1px solid var(--beige-mid)",
                   background: "transparent",
-                  fontFamily: "'Jost', sans-serif",
+                  fontFamily: "'Gabriel Sans', sans-serif",
                   fontSize: "0.85rem",
                   color: "#605952",
                   outline: "none",
