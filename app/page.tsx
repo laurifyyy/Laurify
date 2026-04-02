@@ -693,7 +693,7 @@ export default function LaurifyHomepage() {
                     <span
                       className="sans card-price"
                       style={{
-                        fontFamily: "'Gabriel Sans', sans-serif",
+                        fontFamily: "'Gabriel Sans', 'Helvetica Neue', Arial, sans-serif",
                         fontSize: "1rem",
                         fontWeight: 500,
                         letterSpacing: "0.05em",
