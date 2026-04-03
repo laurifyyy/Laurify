@@ -17,6 +17,7 @@ export default function LaurifyHomepage() {
   const [formData, setFormData] = useState<FormData>(emptyForm);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; phone?: string }>({});
+  const [touched, setTouched] = useState<{ email?: boolean; phone?: boolean }>({});
 
   const validateEmail = (v: string) => v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Lūdzu ievadi derīgu e-pasta adresi (piemēram: vards@domens.lv)" : undefined;
   const validatePhone = (v: string) => v && !/^[+]?[\d\s\-().]{7,}$/.test(v) ? "Lūdzu ievadi derīgu tālruņa numuru (piemēram: +371 20 000 000)" : undefined;
@@ -1274,19 +1275,25 @@ export default function LaurifyHomepage() {
               <div className="form-field">
                 <input type="email" placeholder=" " id="email" autoComplete="email"
                   value={formData.email}
-                  onChange={(e) => { setFormData((p) => ({ ...p, email: e.target.value })); setFieldErrors((p) => ({ ...p, email: undefined })); }}
-                  onBlur={(e) => setFieldErrors((p) => ({ ...p, email: validateEmail(e.target.value) }))} />
+                  onChange={(e) => {
+                    setFormData((p) => ({ ...p, email: e.target.value }));
+                    if (touched.email) setFieldErrors((p) => ({ ...p, email: validateEmail(e.target.value) }));
+                  }}
+                  onBlur={(e) => { setTouched((p) => ({ ...p, email: true })); setFieldErrors((p) => ({ ...p, email: validateEmail(e.target.value) })); }} />
                 <label htmlFor="email">{dict.contact.emailPlaceholder}</label>
-                {fieldErrors.email && <span style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.65rem", letterSpacing: "0.08em", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.email}</span>}
+                {fieldErrors.email && <span style={{ fontFamily: "Georgia, serif", fontSize: "0.72rem", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.email}</span>}
               </div>
 
               <div className="form-field">
                 <input type="tel" placeholder=" " id="phone" autoComplete="tel"
                   value={formData.phone}
-                  onChange={(e) => { setFormData((p) => ({ ...p, phone: e.target.value })); setFieldErrors((p) => ({ ...p, phone: undefined })); }}
-                  onBlur={(e) => setFieldErrors((p) => ({ ...p, phone: validatePhone(e.target.value) }))} />
+                  onChange={(e) => {
+                    setFormData((p) => ({ ...p, phone: e.target.value }));
+                    if (touched.phone) setFieldErrors((p) => ({ ...p, phone: validatePhone(e.target.value) }));
+                  }}
+                  onBlur={(e) => { setTouched((p) => ({ ...p, phone: true })); setFieldErrors((p) => ({ ...p, phone: validatePhone(e.target.value) })); }} />
                 <label htmlFor="phone">{dict.contact.phonePlaceholder}</label>
-                {fieldErrors.phone && <span style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.65rem", letterSpacing: "0.08em", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.phone}</span>}
+                {fieldErrors.phone && <span style={{ fontFamily: "Georgia, serif", fontSize: "0.72rem", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.phone}</span>}
               </div>
 
               <div className="custom-dropdown">
