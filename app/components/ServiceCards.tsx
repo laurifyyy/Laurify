@@ -88,7 +88,7 @@ export default function ServiceCards({ onBook }: Props) {
               <div
                 key={service.id}
                 className="service-visual-card"
-                onMouseEnter={() => !service.comingSoon && setHovered(service.id)}
+                onMouseEnter={() => setHovered(service.id)}
                 onMouseLeave={() => setHovered(null)}
                 style={{
                   background: service.gradient,
