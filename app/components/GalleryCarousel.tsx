@@ -90,7 +90,7 @@ export default function GalleryCarousel() {
             lineHeight: 1.15,
           }}
         >
-          Aikulises
+          Aizkulises
         </h2>
       </div>
 
