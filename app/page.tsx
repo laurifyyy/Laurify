@@ -1199,7 +1199,7 @@ export default function LaurifyHomepage() {
                       letterSpacing: "0.18em",
                       textTransform: "uppercase",
                       color: "var(--gold)",
-                      marginBottom: "0.4rem",
+                      marginBottom: "0.9rem",
                     }}
                   >
                     {label}
