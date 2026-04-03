@@ -46,7 +46,7 @@ export default function ServiceCards({ onBook }: Props) {
   const [selectedArea, setSelectedArea] = useState<Record<string, string>>({});
 
   return (
-    <section style={{ background: "#fff", padding: "8rem 3rem" }}>
+    <section id="services" style={{ background: "#fff", padding: "8rem 3rem" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <div
