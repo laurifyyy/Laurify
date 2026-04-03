@@ -51,19 +51,19 @@ body {
 /* Gallery carousel */
 .gallery-track {
   width: 100%;
-  max-width: 900px;
+  max-width: 1140px;
 }
 .gallery-item-wrap {
-  width: 260px;
-  height: 460px;
+  width: 340px;
+  height: 600px;
 }
 @media (max-width: 768px) {
   .gallery-track {
     max-width: 100%;
   }
   .gallery-item-wrap {
-    width: 80vw;
-    height: 142vw;
+    width: 88vw;
+    height: 156vw;
   }
   .gallery-item-wrap:first-child,
   .gallery-item-wrap:last-child {

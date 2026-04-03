@@ -78,7 +78,7 @@ export default function GalleryCarousel() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "1.5rem",
+          gap: "1.25rem",
           padding: "0 2rem",
         }}
       >
