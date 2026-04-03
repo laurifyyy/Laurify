@@ -11,6 +11,7 @@ export default function LaurifyHomepage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [lang, setLang] = useState<Lang>("lv");
+  const [bookingOpen, setBookingOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
@@ -64,7 +65,7 @@ export default function LaurifyHomepage() {
   ];
 
   const contactInfo = [
-    { label: dict.contact.address, value: "Kr. Valdemāra iela 149, Rīga, LV-1013" },
+    { label: dict.contact.address, value: "Vienības gatve 109, Rīga, LV-1058" },
     { label: dict.contact.phone, value: "+371 20 169 091" },
     { label: dict.contact.email, value: "beauty@laurify.lv" },
     { label: dict.contact.hours, value: dict.contact.hoursValue },
@@ -1235,16 +1236,16 @@ export default function LaurifyHomepage() {
               >
                 {dict.contact.formTitle}
               </h3>
-              <iframe
-                src="https://book.plandok.com/lv/partner/laurify-beauty-syreax"
-                style={{
-                  width: "100%",
-                  height: "700px",
-                  border: "none",
-                  borderRadius: "12px",
-                }}
-                title="Laurify rezervācija"
-              />
+              <p className="sans" style={{ fontSize: "0.85rem", lineHeight: 1.9, color: "var(--taupe)", marginBottom: "2.5rem" }}>
+                {dict.contact.bookingDesc}
+              </p>
+              <button
+                className="btn-primary"
+                style={{ border: "none", width: "100%" }}
+                onClick={() => setBookingOpen(true)}
+              >
+                {dict.contact.submitBtn}
+              </button>
             </div>
           </div>
         </div>
