@@ -470,13 +470,13 @@ export default function LaurifyHomepage() {
             ))}
           </div>
 
-          <a
-            href="#contact"
+          <button
             className="nav-book-btn"
             data-scrolled={navScrolled ? "true" : "false"}
+            onClick={() => setBookingOpen(true)}
           >
             {dict.nav.bookNow}
-          </a>
+          </button>
         </div>
 
         <button
