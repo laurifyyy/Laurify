@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { dictionaries, type Lang } from "./i18n";
+import ServiceCards from "./components/ServiceCards";
 
 const SERVICE_PRICES = ["€185", "€240", "€160", "€95", "€890", "€380"];
 
@@ -698,6 +699,9 @@ export default function LaurifyHomepage() {
         </div>
       </section>
 
+      {/* SERVICE VISUAL CARDS */}
+      <ServiceCards onBook={() => setBookingOpen(true)} />
+
       {/* SERVICES */}
       <section
         id="services"
@@ -1250,6 +1254,52 @@ export default function LaurifyHomepage() {
           </div>
         </div>
       </section>
+
+      {/* PLANDOK BOOKING MODAL */}
+      {bookingOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1rem",
+          }}
+          onClick={() => setBookingOpen(false)}
+        >
+          <div style={{ position: "absolute", inset: 0, background: "rgba(10,31,72,0.7)", backdropFilter: "blur(6px)" }} />
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              maxWidth: "520px",
+              background: "#fff",
+              borderRadius: "16px",
+              overflow: "hidden",
+              boxShadow: "0 32px 80px rgba(10,31,72,0.3)",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.2rem 1.5rem", borderBottom: "1px solid var(--beige)" }}>
+              <span style={{ fontFamily: "'La Luxes Serif', serif", fontSize: "1.2rem", color: "var(--navy)", fontStyle: "italic" }}>Rezervēt vizīti</span>
+              <button
+                onClick={() => setBookingOpen(false)}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "var(--taupe)", fontSize: "1.4rem", lineHeight: 1, padding: "0.2rem 0.4rem" }}
+                aria-label="Aizvērt"
+              >
+                ×
+              </button>
+            </div>
+            <iframe
+              src="https://book.plandok.com/lv/partner/laurify-beauty-syreax"
+              style={{ width: "100%", height: "600px", border: "none", display: "block" }}
+              title="Laurify rezervācija"
+            />
+          </div>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer
