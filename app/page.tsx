@@ -555,7 +555,7 @@ export default function LaurifyHomepage() {
             pointerEvents: "none",
           }}
         >
-          L
+          LA
         </div>
 
         <div
