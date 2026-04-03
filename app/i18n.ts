@@ -73,7 +73,7 @@ export const dictionaries = {
       headline2: "Daily Ceremony",
       p1: "Laurify was founded on the belief that beauty is not a correction — it is a revelation. Our atelier was created as a counterpoint to the rushed, transactional salon experience. Here, time slows.",
       p2: "Each practitioner holds a minimum of 8 years of specialist training. We source only the finest European and botanical ingredients, and every appointment is preceded by a personal consultation.",
-      cta: "Our Story",
+      cta: "Book a Visit",
       tag: "Natural Botanicals",
     },
     testimonials: {
@@ -213,7 +213,7 @@ export const dictionaries = {
       headline2: "Ikdienas Ceremonija",
       p1: "Laurify tika dibināts ar pārliecību, ka skaistums nav korekcija — tā ir atklāsme. Mūsu ateljē tika izveidots kā pretsvars steigainai, transakciju salonā pieredzei. Šeit laiks palēninās.",
       p2: "Katram speciālistam ir vismaz 8 gadu specializētā apmācība. Mēs izmantojam tikai labākās Eiropas un botāniskās sastāvdaļas, un katram apmeklējumam pirms tam notiek personīga konsultācija.",
-      cta: "Mūsu stāsts",
+      cta: "Rezervēt vizīti",
       tag: "Dabīgie botāniskie",
     },
     testimonials: {
@@ -353,7 +353,7 @@ export const dictionaries = {
       headline2: "Ежедневный Ритуал",
       p1: "Laurify был основан на убеждении, что красота — это не исправление, а откровение. Наше ателье создано как противопоставление торопливому, транзакционному опыту в салоне. Здесь время замедляется.",
       p2: "Каждый специалист имеет не менее 8 лет специализированной подготовки. Мы используем только лучшие европейские и ботанические ингредиенты, и каждому визиту предшествует личная консультация.",
-      cta: "Наша история",
+      cta: "Записаться на визит",
       tag: "Натуральные ботанические",
     },
     testimonials: {

@@ -194,6 +194,7 @@ export default function LaurifyHomepage() {
           background: transparent;
           color: var(--navy);
           border: 1px solid var(--navy);
+          border-radius: 8px;
           cursor: pointer;
           transition: all 0.4s ease;
           text-decoration: none;
@@ -914,6 +915,7 @@ export default function LaurifyHomepage() {
                 position: "relative",
                 overflow: "hidden",
                 border: "1px solid rgba(227,212,190,0.25)",
+                borderRadius: "12px",
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
