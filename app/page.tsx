@@ -14,6 +14,15 @@ export default function LaurifyHomepage() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [contactForm, setContactForm] = useState({ name: "", contact: "", message: "" });
   const [contactState, setContactState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [contactError, setContactError] = useState<string | null>(null);
+
+  function validateContact(value: string): string | null {
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const phoneRe = /^[+\d][\d\s\-().]{6,19}$/;
+    if (!value.trim()) return "Lauks ir obligāts";
+    if (!emailRe.test(value) && !phoneRe.test(value)) return "Ievadi derīgu e-pastu vai tālruni";
+    return null;
+  }
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
@@ -1147,6 +1156,9 @@ export default function LaurifyHomepage() {
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();
+                  const err = validateContact(contactForm.contact);
+                  if (err) { setContactError(err); return; }
+                  setContactError(null);
                   setContactState("sending");
                   try {
                     const res = await fetch("/api/contact", {
@@ -1154,10 +1166,8 @@ export default function LaurifyHomepage() {
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
                         firstName: contactForm.name,
-                        lastName: "",
                         email: contactForm.contact.includes("@") ? contactForm.contact : "",
                         phone: !contactForm.contact.includes("@") ? contactForm.contact : "",
-                        service: "",
                         notes: contactForm.message,
                       }),
                     });
@@ -1172,10 +1182,11 @@ export default function LaurifyHomepage() {
                 {(["name", "contact", "message"] as const).map((field) => {
                   const labels = { name: "Vārds", contact: "Tālrunis vai e-pasts", message: "Ziņojums" };
                   const isTextarea = field === "message";
+                  const hasError = field === "contact" && !!contactError;
                   const sharedStyle = {
                     width: "100%",
                     padding: "0.85rem 1rem",
-                    border: "1px solid rgba(10,31,72,0.15)",
+                    border: hasError ? "1px solid #c0392b" : "1px solid rgba(10,31,72,0.15)",
                     borderRadius: "8px",
                     fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
                     fontSize: "0.85rem",
@@ -1187,7 +1198,7 @@ export default function LaurifyHomepage() {
                   };
                   return (
                     <div key={field} style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-                      <label className="sans" style={{ fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--taupe)" }}>
+                      <label className="sans" style={{ fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: hasError ? "#c0392b" : "var(--taupe)" }}>
                         {labels[field]}
                       </label>
                       {isTextarea ? (
@@ -1203,9 +1214,17 @@ export default function LaurifyHomepage() {
                           type="text"
                           required
                           value={contactForm[field]}
-                          onChange={(e) => setContactForm((p) => ({ ...p, [field]: e.target.value }))}
+                          onChange={(e) => {
+                            setContactForm((p) => ({ ...p, [field]: e.target.value }));
+                            if (field === "contact") setContactError(null);
+                          }}
                           style={sharedStyle}
                         />
+                      )}
+                      {hasError && (
+                        <span className="sans" style={{ fontSize: "0.65rem", color: "#c0392b", letterSpacing: "0.05em" }}>
+                          {contactError}
+                        </span>
                       )}
                     </div>
                   );
