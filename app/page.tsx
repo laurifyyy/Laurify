@@ -860,7 +860,7 @@ export default function LaurifyHomepage() {
                   lineHeight: 1.6,
                 }}
               >
-                Zīmola īpašniece & radītāja
+                Zīmola Laurify īpašniece & radītāja
                 <br />
                 Sertificēta speciāliste
               </div>
