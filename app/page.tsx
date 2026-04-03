@@ -174,6 +174,7 @@ export default function LaurifyHomepage() {
           letter-spacing: 0.25em;
           text-transform: uppercase;
           padding: 1rem 2.5rem;
+          border-radius: 8px;
           background: var(--navy);
           color: var(--cream);
           border: none;
