@@ -25,21 +25,29 @@ export default function GalleryCarousel() {
     setCurrent(clamped);
   }, []);
 
-  // autoplay the active video
+  // autoplay video or auto-advance image
   useEffect(() => {
-    const v = videoRefs.current[current];
-    if (v && ITEMS[current].type === "video") {
+    if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
+
+    const item = ITEMS[current];
+
+    if (item.type === "video") {
+      const v = videoRefs.current[current];
+      if (!v) return;
       v.play().catch(() => {});
 
       const onEnded = () => {
-        autoAdvanceTimer.current = setTimeout(() => {
-          goTo(current + 1);
-        }, 3000);
+        autoAdvanceTimer.current = setTimeout(() => goTo(current + 1), 3000);
       };
-
       v.addEventListener("ended", onEnded);
       return () => {
         v.removeEventListener("ended", onEnded);
+        if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
+      };
+    } else {
+      // image: show for 5 seconds then advance
+      autoAdvanceTimer.current = setTimeout(() => goTo(current + 1), 5000);
+      return () => {
         if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
       };
     }
@@ -168,7 +176,6 @@ export default function GalleryCarousel() {
                     src={item.src}
                     muted
                     playsInline
-                    loop
                     controls={isActive}
                     style={{
                       display: "block",
