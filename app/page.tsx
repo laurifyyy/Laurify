@@ -12,8 +12,22 @@ export default function LaurifyHomepage() {
   const [lang, setLang] = useState<Lang>("lv");
   const [selectedService, setSelectedService] = useState("");
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", notes: "" });
+  type FormData = { firstName: string; lastName: string; email: string; phone: string; notes: string };
+  const emptyForm: FormData = { firstName: "", lastName: "", email: "", phone: "", notes: "" };
+  const [formData, setFormData] = useState<FormData>(() => {
+    if (typeof window === "undefined") return emptyForm;
+    try {
+      const saved = localStorage.getItem("laurify_form");
+      return saved ? { ...emptyForm, ...JSON.parse(saved) } : emptyForm;
+    } catch { return emptyForm; }
+  });
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  useEffect(() => {
+    const { notes, ...toSave } = formData;
+    void notes;
+    localStorage.setItem("laurify_form", JSON.stringify(toSave));
+  }, [formData]);
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
