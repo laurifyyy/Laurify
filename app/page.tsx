@@ -1391,7 +1391,7 @@ export default function LaurifyHomepage() {
             maxWidth: "1200px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr",
+            gridTemplateColumns: "1fr",
             gap: "3rem",
           }}
         >
@@ -1492,41 +1492,6 @@ export default function LaurifyHomepage() {
             </div>
           </div>
 
-          {[dict.footer.col1, dict.footer.col3].map(({ title, links }) => (
-            <div key={title}>
-              <div
-                className="sans"
-                style={{
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--gold)",
-                  marginBottom: "1.2rem",
-                }}
-              >
-                {title}
-              </div>
-              {links.map((link) => (
-                <div key={link} style={{ marginBottom: "0.6rem" }}>
-                  <a
-                    href="#"
-                    className="sans"
-                    style={{
-                      fontSize: "0.78rem",
-                      fontWeight: 400,
-                      color: "rgba(245,244,228,0.45)",
-                      textDecoration: "none",
-                      transition: "color 0.3s",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,244,228,0.45)")}
-                  >
-                    {link}
-                  </a>
-                </div>
-              ))}
-            </div>
-          ))}
         </div>
 
         <div
