@@ -1,12 +1,5 @@
 "use client";
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "behold-widget": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & { "feed-id"?: string }, HTMLElement>;
-    }
-  }
-}
 
 import { useState, useEffect, useRef } from "react";
 import { dictionaries, type Lang } from "./i18n";
@@ -1061,9 +1054,9 @@ export default function LaurifyHomepage() {
             </a>
           </div>
           {/* Behold Instagram widget — replace FEED_ID with your actual Behold feed ID */}
-          <div style={{ borderRadius: "12px", overflow: "hidden" }}>
-            <behold-widget feed-id="FEED_ID" />
-          </div>
+          <div style={{ borderRadius: "12px", overflow: "hidden" }}
+            ref={(el) => { if (el && !el.querySelector("behold-widget")) { const w = document.createElement("behold-widget"); w.setAttribute("feed-id", "FEED_ID"); el.appendChild(w); } }}
+          />
         </div>
       </section>
 
