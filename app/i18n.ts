@@ -152,7 +152,7 @@ export const dictionaries = {
         "Ienāc pasaulē, kur viss ir par tevi. Katrs apmeklējums — bez steigas, ar rūpību un pilnīgu veltījumu tavam labsajūtam.",
       cta1: "Rezervē savu vizīti",
       cta2: "Apskatīt pakalpojumus",
-      stat1: "Pieredze",
+      stat1: "Pieredzes gadi",
       stat2: "Apkalpotie klienti",
       scroll: "Ritināt",
     },
