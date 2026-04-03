@@ -11,30 +11,6 @@ export default function LaurifyHomepage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [lang, setLang] = useState<Lang>("lv");
-  const [selectedService, setSelectedService] = useState("");
-  const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
-  type FormData = { firstName: string; lastName: string; email: string; phone: string; notes: string };
-  const emptyForm: FormData = { firstName: "", lastName: "", email: "", phone: "", notes: "" };
-  const [formData, setFormData] = useState<FormData>(emptyForm);
-  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [fieldErrors, setFieldErrors] = useState<{ email?: string; phone?: string }>({});
-  const [touched, setTouched] = useState<{ email?: boolean; phone?: boolean }>({});
-
-  const validateEmail = (v: string) => v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Lūdzu ievadi derīgu e-pasta adresi (piemēram: vards@domens.lv)" : undefined;
-  const validatePhone = (v: string) => v && !/^[+]?[\d\s\-().]{7,}$/.test(v) ? "Lūdzu ievadi derīgu tālruņa numuru (piemēram: +371 20 000 000)" : undefined;
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("laurify_form");
-      if (saved) setFormData((prev) => ({ ...prev, ...JSON.parse(saved) }));
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { notes, ...toSave } = formData;
-    localStorage.setItem("laurify_form", JSON.stringify(toSave));
-  }, [formData]);
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
@@ -1259,122 +1235,16 @@ export default function LaurifyHomepage() {
               >
                 {dict.contact.formTitle}
               </h3>
-
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 2rem" }}>
-                <div className="form-field">
-                  <input type="text" placeholder=" " id="firstName" autoComplete="given-name"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData((p) => ({ ...p, firstName: e.target.value }))} />
-                  <label htmlFor="firstName">{dict.contact.firstName}</label>
-                </div>
-                <div className="form-field">
-                  <input type="text" placeholder=" " id="lastName" autoComplete="family-name"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData((p) => ({ ...p, lastName: e.target.value }))} />
-                  <label htmlFor="lastName">{dict.contact.lastName}</label>
-                </div>
-              </div>
-
-              <div className="form-field">
-                <input type="email" placeholder=" " id="email" autoComplete="email"
-                  value={formData.email}
-                  onChange={(e) => {
-                    setFormData((p) => ({ ...p, email: e.target.value }));
-                    if (touched.email) setFieldErrors((p) => ({ ...p, email: validateEmail(e.target.value) }));
-                  }}
-                  onBlur={(e) => { setTouched((p) => ({ ...p, email: true })); setFieldErrors((p) => ({ ...p, email: validateEmail(e.target.value) })); }} />
-                <label htmlFor="email">{dict.contact.emailPlaceholder}</label>
-                {fieldErrors.email && <span style={{ fontFamily: "Georgia, serif", fontSize: "0.72rem", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.email}</span>}
-              </div>
-
-              <div className="form-field">
-                <input type="tel" placeholder=" " id="phone" autoComplete="tel"
-                  value={formData.phone}
-                  onChange={(e) => {
-                    setFormData((p) => ({ ...p, phone: e.target.value }));
-                    if (touched.phone) setFieldErrors((p) => ({ ...p, phone: validatePhone(e.target.value) }));
-                  }}
-                  onBlur={(e) => { setTouched((p) => ({ ...p, phone: true })); setFieldErrors((p) => ({ ...p, phone: validatePhone(e.target.value) })); }} />
-                <label htmlFor="phone">{dict.contact.phonePlaceholder}</label>
-                {fieldErrors.phone && <span style={{ fontFamily: "Georgia, serif", fontSize: "0.72rem", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.phone}</span>}
-              </div>
-
-              <div className="custom-dropdown">
-                <span className="custom-dropdown-label">{dict.contact.selectService}</span>
-                <button
-                  type="button"
-                  className={`custom-dropdown-trigger${serviceDropdownOpen ? " open" : ""}`}
-                  onClick={() => setServiceDropdownOpen((o) => !o)}
-                >
-                  <span className={selectedService ? "" : "placeholder"}>
-                    {selectedService || dict.contact.selectService}
-                  </span>
-                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" style={{ flexShrink: 0, transition: "transform 0.2s", transform: serviceDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
-                    <path d="M1 1l5 5 5-5" stroke="#605952" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                </button>
-                {serviceDropdownOpen && (
-                  <div className="custom-dropdown-menu">
-                    {services.map((s) => (
-                      <div key={s.title} className="custom-dropdown-item"
-                        onClick={() => { setSelectedService(s.title); setServiceDropdownOpen(false); }}>
-                        {s.title}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="form-field">
-                <textarea placeholder=" " id="notes"
-                  value={formData.notes}
-                  onChange={(e) => setFormData((p) => ({ ...p, notes: e.target.value }))} />
-                <label htmlFor="notes">{dict.contact.notes}</label>
-              </div>
-
-              {formStatus === "success" && (
-                <div style={{ fontFamily: "var(--font-raleway), 'Raleway', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#3a7d44", background: "#f0faf1", border: "1px solid #c3e6cb", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
-                  ✓ &nbsp; Pieprasījums nosūtīts! Sazināsimies ar jums drīzumā.
-                </div>
-              )}
-              {formStatus === "error" && (
-                <div style={{ fontFamily: "var(--font-raleway), 'Raleway', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#842029", background: "#fff2f2", border: "1px solid #f5c2c7", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
-                  ✕ &nbsp; Neizdevās nosūtīt. Lūdzu mēģiniet vēlreiz vai sazinieties pa tālruni.
-                </div>
-              )}
-
-              <button
-                className="btn-primary"
-                style={{ width: "100%", border: "none", marginTop: "0.5rem", opacity: formStatus === "sending" ? 0.7 : 1, cursor: formStatus === "sending" ? "not-allowed" : "pointer" }}
-                disabled={formStatus === "sending"}
-                onClick={async () => {
-                  const emailErr = validateEmail(formData.email);
-                  const phoneErr = validatePhone(formData.phone);
-                  if (emailErr || phoneErr) {
-                    setFieldErrors({ email: emailErr, phone: phoneErr });
-                    return;
-                  }
-                  setFormStatus("sending");
-                  try {
-                    const res = await fetch("/api/contact", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ ...formData, service: selectedService }),
-                    });
-                    if (res.ok) {
-                      setFormStatus("success");
-                      setFormData({ firstName: "", lastName: "", email: "", phone: "", notes: "" });
-                      setSelectedService("");
-                    } else {
-                      setFormStatus("error");
-                    }
-                  } catch {
-                    setFormStatus("error");
-                  }
+              <iframe
+                src="https://book.plandok.com/lv/partner/laurify-beauty-syreax"
+                style={{
+                  width: "100%",
+                  height: "700px",
+                  border: "none",
+                  borderRadius: "12px",
                 }}
-              >
-                {formStatus === "sending" ? "Sūta..." : dict.contact.submitBtn}
-              </button>
+                title="Laurify rezervācija"
+              />
             </div>
           </div>
         </div>
