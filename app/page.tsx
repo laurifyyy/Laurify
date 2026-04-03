@@ -31,8 +31,8 @@ export default function LaurifyHomepage() {
   }, []);
 
   useEffect(() => {
-    const { notes: _n, ...toSave } = formData;
-    void _n;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { notes, ...toSave } = formData;
     localStorage.setItem("laurify_form", JSON.stringify(toSave));
   }, [formData]);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -99,42 +99,6 @@ export default function LaurifyHomepage() {
           font-family: 'La Luxes Serif';
           src: url('/LaLuxes-regular.otf') format('opentype');
           font-weight: 400;
-          font-style: normal;
-          font-display: swap;
-        }
-
-        @font-face {
-          font-family: 'Gabriel Sans';
-          src: url('/fonts/GabrielSans-Trial-Thin.woff') format('woff');
-          font-weight: 200;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Gabriel Sans';
-          src: url('/fonts/GabrielSans-Trial-Light.woff') format('woff');
-          font-weight: 300;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Gabriel Sans';
-          src: url('/fonts/GabrielSans-Trial-Normal.woff') format('woff');
-          font-weight: 400;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Gabriel Sans';
-          src: url('/fonts/GabrielSans-Trial-Medium.woff') format('woff');
-          font-weight: 500;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Gabriel Sans';
-          src: url('/fonts/GabrielSans-Trial-Bold.woff') format('woff');
-          font-weight: 700;
           font-style: normal;
           font-display: swap;
         }
@@ -274,16 +238,6 @@ export default function LaurifyHomepage() {
         .card-content { transition: color 0.4s; display: flex; flex-direction: column; height: 100%; }
         .card-icon { font-size: 1.2rem; color: var(--gold); margin-bottom: 1.2rem; display: block; transition: color 0.4s; }
         .card-price { transition: color 0.4s; }
-
-        .fade-in {
-          opacity: 0;
-          transform: translateY(24px);
-          transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .fade-in.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
 
         .divider {
           width: 40px;
@@ -1052,7 +1006,6 @@ export default function LaurifyHomepage() {
               @laurifybeauty
             </a>
           </div>
-          {/* Behold Instagram widget — replace FEED_ID with your actual Behold feed ID */}
           <div style={{ borderRadius: "12px", overflow: "hidden" }}
             ref={(el) => { if (el && !el.querySelector("behold-widget")) { const w = document.createElement("behold-widget"); w.setAttribute("feed-id", "DHP5OeHgnKYnID01B0lS"); el.appendChild(w); } }}
           />
