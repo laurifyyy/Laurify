@@ -325,8 +325,8 @@ export default function LaurifyHomepage() {
           border: none;
           border-bottom: 1.5px solid var(--beige-mid);
           background: transparent;
-          padding: 1.5rem 0 0.6rem;
-          font-family: 'Gabriel Sans', sans-serif;
+          padding: 1.6rem 0 0.9rem;
+          font-family: 'Helvetica Neue', Arial, sans-serif;
           font-size: 0.9rem;
           color: var(--navy);
           outline: none;
@@ -339,7 +339,7 @@ export default function LaurifyHomepage() {
         }
         .form-field label {
           position: absolute;
-          top: 1.5rem;
+          top: 1.6rem;
           left: 0;
           font-family: 'Gabriel Sans', sans-serif;
           font-size: 0.85rem;
