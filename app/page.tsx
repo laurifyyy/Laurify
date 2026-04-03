@@ -12,6 +12,8 @@ export default function LaurifyHomepage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [lang, setLang] = useState<Lang>("lv");
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [contactForm, setContactForm] = useState({ name: "", contact: "", message: "" });
+  const [contactState, setContactState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
@@ -1142,16 +1144,93 @@ export default function LaurifyHomepage() {
               >
                 {dict.contact.formTitle}
               </h3>
-              <p className="sans" style={{ fontSize: "0.85rem", lineHeight: 1.9, color: "var(--taupe)", marginBottom: "2.5rem" }}>
-                {dict.contact.bookingDesc}
-              </p>
-              <button
-                className="btn-primary"
-                style={{ border: "none", width: "100%" }}
-                onClick={() => setBookingOpen(true)}
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setContactState("sending");
+                  try {
+                    const res = await fetch("/api/contact", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        firstName: contactForm.name,
+                        lastName: "",
+                        email: contactForm.contact.includes("@") ? contactForm.contact : "",
+                        phone: !contactForm.contact.includes("@") ? contactForm.contact : "",
+                        service: "",
+                        notes: contactForm.message,
+                      }),
+                    });
+                    if (res.ok) setContactState("sent");
+                    else setContactState("error");
+                  } catch {
+                    setContactState("error");
+                  }
+                }}
+                style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
               >
-                {dict.contact.submitBtn}
-              </button>
+                {(["name", "contact", "message"] as const).map((field) => {
+                  const labels = { name: "Vārds", contact: "Tālrunis vai e-pasts", message: "Ziņojums" };
+                  const isTextarea = field === "message";
+                  const sharedStyle = {
+                    width: "100%",
+                    padding: "0.85rem 1rem",
+                    border: "1px solid rgba(10,31,72,0.15)",
+                    borderRadius: "8px",
+                    fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
+                    fontSize: "0.85rem",
+                    color: "var(--navy)",
+                    background: "#fff",
+                    outline: "none",
+                    resize: "none" as const,
+                    boxSizing: "border-box" as const,
+                  };
+                  return (
+                    <div key={field} style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                      <label className="sans" style={{ fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--taupe)" }}>
+                        {labels[field]}
+                      </label>
+                      {isTextarea ? (
+                        <textarea
+                          rows={4}
+                          required
+                          value={contactForm[field]}
+                          onChange={(e) => setContactForm((p) => ({ ...p, [field]: e.target.value }))}
+                          style={sharedStyle}
+                        />
+                      ) : (
+                        <input
+                          type="text"
+                          required
+                          value={contactForm[field]}
+                          onChange={(e) => setContactForm((p) => ({ ...p, [field]: e.target.value }))}
+                          style={sharedStyle}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+
+                {contactState === "sent" ? (
+                  <p className="sans" style={{ fontSize: "0.8rem", color: "var(--navy)", textAlign: "center", padding: "0.8rem", background: "rgba(10,31,72,0.05)", borderRadius: "8px" }}>
+                    Paldies! Ziņojums nosūtīts. Sazināsimies drīzumā.
+                  </p>
+                ) : (
+                  <button
+                    type="submit"
+                    className="btn-primary"
+                    style={{ border: "none", width: "100%", opacity: contactState === "sending" ? 0.6 : 1 }}
+                    disabled={contactState === "sending"}
+                  >
+                    {contactState === "sending" ? "Sūta..." : "Nosūtīt ziņojumu"}
+                  </button>
+                )}
+                {contactState === "error" && (
+                  <p className="sans" style={{ fontSize: "0.75rem", color: "#c0392b", textAlign: "center" }}>
+                    Neizdevās nosūtīt. Lūdzu mēģini vēlreiz vai raksti tieši uz beauty@laurify.lv
+                  </p>
+                )}
+              </form>
             </div>
           </div>
         </div>
