@@ -1055,7 +1055,7 @@ export default function LaurifyHomepage() {
           </div>
           {/* Behold Instagram widget — replace FEED_ID with your actual Behold feed ID */}
           <div style={{ borderRadius: "12px", overflow: "hidden" }}
-            ref={(el) => { if (el && !el.querySelector("behold-widget")) { const w = document.createElement("behold-widget"); w.setAttribute("feed-id", "FEED_ID"); el.appendChild(w); } }}
+            ref={(el) => { if (el && !el.querySelector("behold-widget")) { const w = document.createElement("behold-widget"); w.setAttribute("feed-id", "DHP5OeHgnKYnID01B0lS"); el.appendChild(w); } }}
           />
         </div>
       </section>
