@@ -806,7 +806,7 @@ export default function LaurifyHomepage() {
                 aspectRatio: "3/4",
                 position: "relative",
                 overflow: "hidden",
-                border: "1px solid rgba(227,212,190,0.25)",
+                border: "2px solid var(--gold)",
                 borderRadius: "12px",
               }}
             >
