@@ -833,7 +833,7 @@ export default function LaurifyHomepage() {
                 left: "-2.5rem",
                 background: "var(--gold)",
                 padding: "1.5rem 2rem",
-                maxWidth: "260px",
+                maxWidth: "340px",
               }}
             >
               <div
@@ -858,6 +858,7 @@ export default function LaurifyHomepage() {
                   color: "var(--navy)",
                   opacity: 0.75,
                   lineHeight: 1.6,
+                  whiteSpace: "nowrap",
                 }}
               >
                 Zīmola Laurify īpašniece & radītāja

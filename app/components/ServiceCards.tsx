@@ -26,7 +26,7 @@ const SERVICES = [
   },
   {
     id: "laser",
-    title: "Lāzera Depilācija",
+    title: "Lāzerepilācija",
     subtitle: "Drīzumā",
     gradient: "linear-gradient(160deg, #1a0a2e 0%, #2d1054 50%, #3d1a6e 100%)",
     bgImage: "/laser.jpg",
