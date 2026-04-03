@@ -411,6 +411,7 @@ export default function LaurifyHomepage() {
           right: 0;
           background: #fff;
           border: 1px solid var(--beige-mid);
+          border-radius: 10px;
           box-shadow: 0 8px 32px rgba(10,31,72,0.10);
           z-index: 100;
           overflow: hidden;
