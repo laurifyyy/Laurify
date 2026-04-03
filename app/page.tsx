@@ -833,7 +833,7 @@ export default function LaurifyHomepage() {
                 left: "-2.5rem",
                 background: "var(--gold)",
                 padding: "1.5rem 2rem",
-                maxWidth: "220px",
+                maxWidth: "260px",
               }}
             >
               <div
@@ -861,8 +861,20 @@ export default function LaurifyHomepage() {
                 }}
               >
                 Zīmola Laurify īpašniece & radītāja
-                <br />
-                <span style={{ fontWeight: 600, opacity: 1, letterSpacing: "0.14em", color: "var(--navy)" }}>Sertificēta speciāliste</span>
+              </div>
+              <div
+                className="sans"
+                style={{
+                  fontSize: "0.6rem",
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--navy)",
+                  fontWeight: 700,
+                  marginTop: "0.4rem",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Sertificēta speciāliste
               </div>
             </div>
           </div>
