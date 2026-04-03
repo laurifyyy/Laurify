@@ -1110,6 +1110,45 @@ export default function LaurifyHomepage() {
                   </p>
                 )}
               </form>
+
+              <div style={{ marginTop: "1rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                <div style={{ flex: 1, height: "1px", background: "rgba(10,31,72,0.1)" }} />
+                <span className="sans" style={{ fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--taupe)" }}>vai</span>
+                <div style={{ flex: 1, height: "1px", background: "rgba(10,31,72,0.1)" }} />
+              </div>
+
+              <a
+                href="https://wa.me/37120169091"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  marginTop: "1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.6rem",
+                  padding: "0.75rem 1.5rem",
+                  borderRadius: "8px",
+                  border: "1px solid #25D366",
+                  background: "rgba(37,211,102,0.06)",
+                  color: "#1a9e4e",
+                  textDecoration: "none",
+                  fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  fontWeight: 600,
+                  transition: "background 0.2s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(37,211,102,0.14)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(37,211,102,0.06)")}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.528 5.855L.057 23.214a.75.75 0 00.921.921l5.4-1.463A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.694 9.694 0 01-4.964-1.363l-.355-.212-3.683.997.985-3.6-.232-.371A9.712 9.712 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+                </svg>
+                Rakstīt WhatsApp
+              </a>
             </div>
           </div>
         </div>
