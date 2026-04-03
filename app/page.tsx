@@ -1205,8 +1205,8 @@ export default function LaurifyHomepage() {
                     {label}
                   </div>
                   <div
-                    className="sans"
                     style={{
+                      fontFamily: "Georgia, 'Times New Roman', serif",
                       fontSize: "0.875rem",
                       fontWeight: 400,
                       color: "var(--navy)",
