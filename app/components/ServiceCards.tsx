@@ -17,7 +17,7 @@ const SERVICES = [
     title: "Zelta Ietīšana",
     subtitle: "Ķermeņa Procedūra",
     gradient: "linear-gradient(160deg, #2a1a00 0%, #5c3d00 50%, #8a5e00 100%)",
-    bgImage: null,
+    bgImage: "/gold-wrap.jpg",
     accentColor: "rgba(227,212,190,0.9)",
     areas: ["Pilns ķermenis", "Vēders", "Kājas", "Rokas"],
     comingSoon: false,
