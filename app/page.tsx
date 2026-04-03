@@ -243,6 +243,12 @@ export default function LaurifyHomepage() {
           50% { transform: translateY(-8px); }
         }
 
+        @keyframes scrollWheel {
+          0% { opacity: 1; transform: translateY(0); }
+          80% { opacity: 0; transform: translateY(10px); }
+          100% { opacity: 0; transform: translateY(0); }
+        }
+
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
@@ -663,8 +669,8 @@ export default function LaurifyHomepage() {
         </div>
 
         {/* Scroll indicator */}
-        <div
-          className="sans"
+        <a
+          href="#services"
           style={{
             position: "absolute",
             bottom: "2.5rem",
@@ -673,24 +679,34 @@ export default function LaurifyHomepage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "0.5rem",
-            color: "rgba(245,244,228,0.4)",
-            fontSize: "0.6rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
+            gap: "0.6rem",
+            textDecoration: "none",
+            cursor: "pointer",
           }}
         >
-          <span>{dict.hero.scroll}</span>
-          <div
-            style={{
-              width: "1px",
-              height: "40px",
-              background:
-                "linear-gradient(to bottom, rgba(245,244,228,0.4), transparent)",
-              animation: "float 2s ease-in-out infinite",
-            }}
-          />
-        </div>
+          <span className="sans" style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(245,244,228,0.35)" }}>
+            {dict.hero.scroll}
+          </span>
+          {/* Mouse outline */}
+          <div style={{
+            width: "22px",
+            height: "34px",
+            border: "1.5px solid rgba(245,244,228,0.35)",
+            borderRadius: "11px",
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "5px",
+          }}>
+            {/* Scroll wheel dot */}
+            <div style={{
+              width: "3px",
+              height: "6px",
+              background: "rgba(245,244,228,0.6)",
+              borderRadius: "2px",
+              animation: "scrollWheel 1.6s ease-in-out infinite",
+            }} />
+          </div>
+        </a>
       </section>
 
       {/* SERVICE VISUAL CARDS */}
