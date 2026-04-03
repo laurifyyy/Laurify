@@ -108,7 +108,7 @@ export default function ServiceCards({ onBook }: Props) {
                       backgroundImage: `url(${service.bgImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      opacity: isHovered ? 0.35 : 0,
+                      opacity: isHovered ? 0.45 : 0.2,
                       transition: "opacity 0.5s ease",
                     }}
                   />
