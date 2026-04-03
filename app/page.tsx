@@ -14,18 +14,19 @@ export default function LaurifyHomepage() {
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   type FormData = { firstName: string; lastName: string; email: string; phone: string; notes: string };
   const emptyForm: FormData = { firstName: "", lastName: "", email: "", phone: "", notes: "" };
-  const [formData, setFormData] = useState<FormData>(() => {
-    if (typeof window === "undefined") return emptyForm;
-    try {
-      const saved = localStorage.getItem("laurify_form");
-      return saved ? { ...emptyForm, ...JSON.parse(saved) } : emptyForm;
-    } catch { return emptyForm; }
-  });
+  const [formData, setFormData] = useState<FormData>(emptyForm);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   useEffect(() => {
-    const { notes, ...toSave } = formData;
-    void notes;
+    try {
+      const saved = localStorage.getItem("laurify_form");
+      if (saved) setFormData((prev) => ({ ...prev, ...JSON.parse(saved) }));
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    const { notes: _n, ...toSave } = formData;
+    void _n;
     localStorage.setItem("laurify_form", JSON.stringify(toSave));
   }, [formData]);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -1314,12 +1315,12 @@ export default function LaurifyHomepage() {
               </div>
 
               {formStatus === "success" && (
-                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#3a7d44", background: "#f0faf1", border: "1px solid #c3e6cb", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
+                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#3a7d44", background: "#f0faf1", border: "1px solid #c3e6cb", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
                   ✓ &nbsp; Pieprasījums nosūtīts! Sazināsimies ar jums drīzumā.
                 </div>
               )}
               {formStatus === "error" && (
-                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#842029", background: "#fff2f2", border: "1px solid #f5c2c7", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
+                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#842029", background: "#fff2f2", border: "1px solid #f5c2c7", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
                   ✕ &nbsp; Neizdevās nosūtīt. Lūdzu mēģiniet vēlreiz vai sazinieties pa tālruni.
                 </div>
               )}
