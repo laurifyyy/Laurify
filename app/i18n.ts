@@ -128,10 +128,6 @@ export const dictionaries = {
         title: "Services",
         links: ["Signature Facial", "Hair Artistry", "Body Sculpt", "Bridal Atelier"],
       },
-      col2: {
-        title: "Atelier",
-        links: ["Our Story", "The Team", "Press", "Gift Cards"],
-      },
       col3: {
         title: "Follow",
         links: ["Instagram", "Pinterest", "LinkedIn", "Newsletter"],
@@ -267,10 +263,6 @@ export const dictionaries = {
       col1: {
         title: "Pakalpojumi",
         links: ["Signatūras Sejas", "Matu Māksla", "Ķermeņa Skulptūra", "Kāzu Ateljē"],
-      },
-      col2: {
-        title: "Ateljē",
-        links: ["Mūsu stāsts", "Komanda", "Prese", "Dāvanu Kartes"],
       },
       col3: {
         title: "Sekot",
@@ -412,10 +404,6 @@ export const dictionaries = {
           "Моделирование Тела",
           "Свадебное Ателье",
         ],
-      },
-      col2: {
-        title: "Ателье",
-        links: ["Наша история", "Команда", "Пресса", "Подарочные карты"],
       },
       col3: {
         title: "Следите",

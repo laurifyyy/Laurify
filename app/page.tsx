@@ -1259,7 +1259,7 @@ export default function LaurifyHomepage() {
             maxWidth: "1200px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr",
+            gridTemplateColumns: "2fr 1fr 1fr",
             gap: "3rem",
           }}
         >
@@ -1360,7 +1360,7 @@ export default function LaurifyHomepage() {
             </div>
           </div>
 
-          {[dict.footer.col1, dict.footer.col2, dict.footer.col3].map(({ title, links }) => (
+          {[dict.footer.col1, dict.footer.col3].map(({ title, links }) => (
             <div key={title}>
               <div
                 className="sans"
