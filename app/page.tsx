@@ -862,7 +862,7 @@ export default function LaurifyHomepage() {
               >
                 Zīmola Laurify īpašniece & radītāja
                 <br />
-                Sertificēta speciāliste
+                <span style={{ fontWeight: 600, opacity: 1, letterSpacing: "0.14em", color: "var(--navy)" }}>Sertificēta speciāliste</span>
               </div>
             </div>
           </div>
