@@ -24,3 +24,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.instagram-section {
+  padding: 6rem 3rem;
+}
+
+@media (max-width: 768px) {
+  .instagram-section {
+    padding: 4rem 1rem;
+  }
+}
+
+/* Behold widget mobile override — force 2 columns on small screens */
+@media (max-width: 768px) {
+  behold-widget {
+    --columns: 2 !important;
+  }
+  behold-widget .BeholdFeed__grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
