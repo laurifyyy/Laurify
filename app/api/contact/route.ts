@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       from: "Laurify <onboarding@resend.dev>",
       to: "beauty@laurify.lv",
       replyTo: email,
-      subject: `Rezervācijas pieprasījums — ${service || "Nav norādīts"} [${Date.now()}]`,
+      subject: `Rezervācijas pieprasījums — ${service || "Nav norādīts"} · ${new Date().toLocaleString("lv-LV", { timeZone: "Europe/Riga", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })}`,
       html: `
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 2rem; color: #0A1F48;">
           <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #E3D4BE; padding-bottom: 1rem;">
