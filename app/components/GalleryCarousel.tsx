@@ -15,6 +15,7 @@ export default function GalleryCarousel() {
   const [current, setCurrent] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const goTo = useCallback((index: number) => {
     const clamped = (index + ITEMS.length) % ITEMS.length;
@@ -136,6 +137,13 @@ export default function GalleryCarousel() {
             gap: "1rem",
             alignItems: "center",
             justifyContent: "center",
+          }}
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const diff = touchStartX.current - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+            touchStartX.current = null;
           }}
         >
           {[prev, current, next].map((idx, pos) => {
