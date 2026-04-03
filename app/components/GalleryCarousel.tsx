@@ -14,10 +14,11 @@ const ITEMS = [
 export default function GalleryCarousel() {
   const [current, setCurrent] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const goTo = useCallback((index: number) => {
     const clamped = (index + ITEMS.length) % ITEMS.length;
-    // pause all videos
+    if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
     videoRefs.current.forEach((v) => {
       if (v) { v.pause(); v.currentTime = 0; }
     });
@@ -29,8 +30,20 @@ export default function GalleryCarousel() {
     const v = videoRefs.current[current];
     if (v && ITEMS[current].type === "video") {
       v.play().catch(() => {});
+
+      const onEnded = () => {
+        autoAdvanceTimer.current = setTimeout(() => {
+          goTo(current + 1);
+        }, 3000);
+      };
+
+      v.addEventListener("ended", onEnded);
+      return () => {
+        v.removeEventListener("ended", onEnded);
+        if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
+      };
     }
-  }, [current]);
+  }, [current, goTo]);
 
   const prev = (current - 1 + ITEMS.length) % ITEMS.length;
   const next = (current + 1) % ITEMS.length;
