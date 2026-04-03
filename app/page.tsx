@@ -53,6 +53,15 @@ export default function LaurifyHomepage() {
   }, []);
 
   useEffect(() => {
+    if (!document.querySelector('script[src="https://elfsightcdn.com/platform.js"]')) {
+      const script = document.createElement("script");
+      script.src = "https://elfsightcdn.com/platform.js";
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -1140,6 +1149,17 @@ export default function LaurifyHomepage() {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* GOOGLE REVIEWS */}
+      <section style={{ background: "var(--cream)", padding: "6rem 3rem" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+            <div className="ornament sans">✦ &nbsp; Google Atsauksmes &nbsp; ✦</div>
+            <div className="divider divider-center" />
+          </div>
+          <div className="elfsight-app-ae42c5ea-d37a-4cea-bf30-483fbe494c96" data-elfsight-app-lazy />
         </div>
       </section>
 
