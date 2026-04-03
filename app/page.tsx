@@ -1038,7 +1038,7 @@ export default function LaurifyHomepage() {
       </section>
 
       {/* INSTAGRAM FEED */}
-      <section style={{ background: "var(--cream)", padding: "6rem 3rem" }}>
+      <section style={{ background: "#ffffff", padding: "6rem 3rem" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="ornament sans">✦ &nbsp; Instagram &nbsp; ✦</div>
