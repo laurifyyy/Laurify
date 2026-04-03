@@ -156,7 +156,7 @@ export const dictionaries = {
       badgeRole: "Laurify Brand Owner & Creator",
       badgeCert: "Certified Specialist",
       gallery: "Our Gallery",
-      galleryTitle: "Aizkulises",
+      galleryTitle: "Behind the Scenes",
       googleReviews: "Google Reviews",
     },
     footer: {
@@ -504,7 +504,7 @@ export const dictionaries = {
       badgeRole: "Владелец & создатель бренда Laurify",
       badgeCert: "Сертифицированный специалист",
       gallery: "Наша Галерея",
-      galleryTitle: "Aizkulises",
+      galleryTitle: "За кулисами",
       googleReviews: "Отзывы Google",
     },
     footer: {
