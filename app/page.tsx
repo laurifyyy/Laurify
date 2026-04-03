@@ -538,24 +538,28 @@ export default function LaurifyHomepage() {
           }}
         />
 
-        {/* Large decorative letter */}
+        {/* Large decorative letters stacked on vertical line */}
         <div
           className="mobile-hidden"
           style={{
             position: "absolute",
-            right: "8%",
+            right: "12%",
             top: "50%",
-            transform: "translateY(-50%)",
+            transform: "translate(50%, -50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             fontFamily: "'La Luxes Serif', serif",
-            fontSize: "clamp(12rem, 18vw, 22rem)",
+            fontSize: "clamp(8rem, 13vw, 16rem)",
             fontWeight: 400,
             color: "rgba(227,212,190,0.06)",
-            lineHeight: 1,
+            lineHeight: 0.9,
             userSelect: "none",
             pointerEvents: "none",
           }}
         >
-          LA
+          <span>L</span>
+          <span>A</span>
         </div>
 
         <div
