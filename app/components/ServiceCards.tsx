@@ -181,7 +181,7 @@ export default function ServiceCards({ onBook }: Props) {
                   <h3
                     style={{
                       fontFamily: "'La Luxes Serif', serif",
-                      fontSize: "2rem",
+                      fontSize: "clamp(1.3rem, 5.5vw, 2rem)",
                       fontWeight: 400,
                       fontStyle: "italic",
                       color: "#fff",
@@ -210,7 +210,7 @@ export default function ServiceCards({ onBook }: Props) {
                   <h3
                     style={{
                       fontFamily: "'La Luxes Serif', serif",
-                      fontSize: "1.7rem",
+                      fontSize: "clamp(1.2rem, 5vw, 1.7rem)",
                       fontWeight: 400,
                       fontStyle: "italic",
                       color: "#fff",
