@@ -102,6 +102,30 @@ export const dictionaries = {
         },
       ],
     },
+    cards: {
+      ornament: "Our Services",
+      heading: "Choose a Treatment",
+      comingSoon: "Coming Soon",
+      selectZone: "Select Zone",
+      bookBtn: "Book an Appointment",
+      services: [
+        {
+          title: "RF Lifting",
+          subtitle: "Face & Body",
+          areas: ["Legs", "Calves", "Abdomen", "Buttocks", "Arms"],
+        },
+        {
+          title: "Gold Wrap",
+          subtitle: "Body Treatment",
+          areas: ["Full body", "Abdomen", "Legs", "Arms"],
+        },
+        {
+          title: "Laser Epilation",
+          subtitle: "Coming Soon",
+          areas: ["Arms", "Full legs", "Back", "Underarms", "Bikini", "Full bikini"],
+        },
+      ],
+    },
     contact: {
       ornament: "Reserve Your Visit",
       title: "Begin Your Ritual",
@@ -252,6 +276,30 @@ export const dictionaries = {
         },
       ],
     },
+    cards: {
+      ornament: "Mūsu Pakalpojumi",
+      heading: "Izvēlies procedūru",
+      comingSoon: "Drīzumā",
+      selectZone: "Izvēlies zonu",
+      bookBtn: "Rezervēt vizīti",
+      services: [
+        {
+          title: "RF Lifting",
+          subtitle: "Sejas & Ķermeņa",
+          areas: ["Kājas", "Ikri", "Vēders", "Sēžamvieta", "Rokas"],
+        },
+        {
+          title: "Zelta Ietīšana",
+          subtitle: "Ķermeņa Procedūra",
+          areas: ["Pilns ķermenis", "Vēders", "Kājas", "Rokas"],
+        },
+        {
+          title: "Lāzerepilācija",
+          subtitle: "Drīzumā",
+          areas: ["Rokas", "Pilnas kājas", "Mugura", "Paduses", "Bikini", "Pilns bikini"],
+        },
+      ],
+    },
     contact: {
       ornament: "Rezervē savu vizīti",
       title: "Sāc savu rituālu",
@@ -399,6 +447,30 @@ export const dictionaries = {
           name: "Natasha R.",
           role: "Дизайнер интерьеров, Стокгольм",
           initials: "NR",
+        },
+      ],
+    },
+    cards: {
+      ornament: "Наши Услуги",
+      heading: "Выберите процедуру",
+      comingSoon: "Скоро",
+      selectZone: "Выберите зону",
+      bookBtn: "Записаться",
+      services: [
+        {
+          title: "RF Лифтинг",
+          subtitle: "Лицо & Тело",
+          areas: ["Ноги", "Икры", "Живот", "Ягодицы", "Руки"],
+        },
+        {
+          title: "Золотое Обёртывание",
+          subtitle: "Процедура для тела",
+          areas: ["Всё тело", "Живот", "Ноги", "Руки"],
+        },
+        {
+          title: "Лазерная Эпиляция",
+          subtitle: "Скоро",
+          areas: ["Руки", "Полные ноги", "Спина", "Подмышки", "Бикини", "Полное бикини"],
         },
       ],
     },

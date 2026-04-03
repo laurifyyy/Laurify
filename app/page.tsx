@@ -722,7 +722,7 @@ export default function LaurifyHomepage() {
       </section>
 
       {/* SERVICE VISUAL CARDS */}
-      <ServiceCards onBook={() => setBookingOpen(true)} />
+      <ServiceCards onBook={() => setBookingOpen(true)} cards={dict.cards} />
 
       {/* ABOUT */}
       <section

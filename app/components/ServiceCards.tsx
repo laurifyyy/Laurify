@@ -1,49 +1,51 @@
 "use client";
 import { useState } from "react";
+import type { dictionaries } from "../i18n";
 
-const SERVICES = [
+type Cards = typeof dictionaries[keyof typeof dictionaries]["cards"];
+
+const SERVICE_META = [
   {
     id: "rf",
-    title: "RF Lifting",
-    subtitle: "Sejas & Ķermeņa",
     gradient: "linear-gradient(160deg, #0a1f48 0%, #0d2454 60%, #1a3a6e 100%)",
     bgImage: "/rf-lifting.jpg",
     bgPosition: "center top",
     accentColor: "rgba(227,212,190,0.9)",
-    areas: ["Kājas", "Ikri", "Vēders", "Sēžamvieta", "Rokas"],
     comingSoon: false,
   },
   {
     id: "wrap",
-    title: "Zelta Ietīšana",
-    subtitle: "Ķermeņa Procedūra",
     gradient: "linear-gradient(160deg, #2a1a00 0%, #5c3d00 50%, #8a5e00 100%)",
     bgImage: "/gold-wrap.jpg",
     bgPosition: "center center",
     accentColor: "rgba(227,212,190,0.9)",
-    areas: ["Pilns ķermenis", "Vēders", "Kājas", "Rokas"],
     comingSoon: false,
   },
   {
     id: "laser",
-    title: "Lāzerepilācija",
-    subtitle: "Drīzumā",
     gradient: "linear-gradient(160deg, #1a0a2e 0%, #2d1054 50%, #3d1a6e 100%)",
     bgImage: "/laser.jpg",
     bgPosition: "center center",
     accentColor: "rgba(200,180,255,0.8)",
-    areas: ["Rokas", "Pilnas kājas", "Mugura", "Paduses", "Bikini", "Pilns bikini"],
     comingSoon: true,
   },
 ];
 
 interface Props {
   onBook: () => void;
+  cards: Cards;
 }
 
-export default function ServiceCards({ onBook }: Props) {
+export default function ServiceCards({ onBook, cards }: Props) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<Record<string, string>>({});
+
+  const services = SERVICE_META.map((meta, i) => ({
+    ...meta,
+    title: cards.services[i].title,
+    subtitle: cards.services[i].subtitle,
+    areas: cards.services[i].areas,
+  }));
 
   return (
     <section id="services" style={{ background: "#fff", padding: "clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem)" }}>
@@ -58,7 +60,7 @@ export default function ServiceCards({ onBook }: Props) {
               textTransform: "uppercase",
             }}
           >
-            ✦ &nbsp; Mūsu Pakalpojumi &nbsp; ✦
+            ✦ &nbsp; {cards.ornament} &nbsp; ✦
           </div>
           <div
             style={{
@@ -78,12 +80,12 @@ export default function ServiceCards({ onBook }: Props) {
               lineHeight: 1.15,
             }}
           >
-            Izvēlies procedūru
+            {cards.heading}
           </h2>
         </div>
 
         <div className="service-visual-grid">
-          {SERVICES.map((service) => {
+          {services.map((service) => {
             const isHovered = hovered === service.id;
             const picked = selectedArea[service.id];
 
@@ -102,7 +104,7 @@ export default function ServiceCards({ onBook }: Props) {
                   cursor: service.comingSoon ? "default" : "pointer",
                 }}
               >
-                {/* Background image (fades in on hover) */}
+                {/* Background image */}
                 {service.bgImage && (
                   <div
                     style={{
@@ -117,14 +119,12 @@ export default function ServiceCards({ onBook }: Props) {
                   />
                 )}
 
-                {/* Texture overlay */}
+                {/* Overlay */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: isHovered
-                      ? "rgba(0,0,0,0.45)"
-                      : "rgba(0,0,0,0.15)",
+                    background: isHovered ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.15)",
                     transition: "background 0.4s ease",
                   }}
                 />
@@ -148,11 +148,11 @@ export default function ServiceCards({ onBook }: Props) {
                       zIndex: 2,
                     }}
                   >
-                    Drīzumā
+                    {cards.comingSoon}
                   </div>
                 )}
 
-                {/* Default label (visible when not hovered) */}
+                {/* Default label */}
                 <div
                   style={{
                     position: "absolute",
@@ -229,7 +229,7 @@ export default function ServiceCards({ onBook }: Props) {
                       marginBottom: "1.4rem",
                     }}
                   >
-                    Izvēlies zonu
+                    {cards.selectZone}
                   </div>
 
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginBottom: "1.6rem" }}>
@@ -293,7 +293,7 @@ export default function ServiceCards({ onBook }: Props) {
                       e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)";
                     }}
                   >
-                    Rezervēt vizīti
+                    {cards.bookBtn}
                   </button>
                 </div>
               </div>
