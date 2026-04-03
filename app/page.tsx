@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from "react";
 import { dictionaries, type Lang } from "./i18n";
 import ServiceCards from "./components/ServiceCards";
 
-const SERVICE_PRICES = ["€185", "€240", "€160", "€95", "€890", "€380"];
 
 export default function LaurifyHomepage() {
   const [scrollY, setScrollY] = useState(0);
@@ -16,11 +15,6 @@ export default function LaurifyHomepage() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
-  const services = dict.services.items.map((item, i) => ({
-    ...item,
-    price: SERVICE_PRICES[i],
-    icon: "✦",
-  }));
   const testimonials = dict.testimonials.items;
 
   useEffect(() => {
@@ -701,131 +695,6 @@ export default function LaurifyHomepage() {
 
       {/* SERVICE VISUAL CARDS */}
       <ServiceCards onBook={() => setBookingOpen(true)} />
-
-      {/* SERVICES */}
-      <section
-        id="services"
-        style={{
-          background: "var(--cream)",
-          padding: "8rem 3rem",
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "5rem" }}>
-            <div className="ornament sans">✦ &nbsp; {dict.services.ornament} &nbsp; ✦</div>
-            <div className="divider divider-center" />
-            <h2
-              style={{
-                fontFamily: "'La Luxes Serif', serif",
-                fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-                fontWeight: 400,
-                fontStyle: "italic",
-                lineHeight: 1.15,
-                color: "var(--navy)",
-              }}
-            >
-              {dict.services.title}
-            </h2>
-            <p
-              className="sans"
-              style={{
-                fontSize: "0.85rem",
-                fontWeight: 400,
-                color: "#605952",
-                marginTop: "1rem",
-                maxWidth: "440px",
-                margin: "1rem auto 0",
-                lineHeight: 1.8,
-              }}
-            >
-              {dict.services.subtitle}
-            </p>
-          </div>
-
-          <div
-            className="services-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "1.5rem",
-              background: "transparent",
-            }}
-          >
-            {services.map((service) => (
-              <div key={service.title} className="service-card">
-                <div className="card-content">
-                  <span className="card-icon">{service.icon}</span>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
-                      fontSize: "0.8rem",
-                      fontWeight: 500,
-                      letterSpacing: "0.2em",
-                      textTransform: "uppercase",
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    {service.title}
-                  </h3>
-                  <p
-                    className="sans"
-                    style={{
-                      fontSize: "0.8rem",
-                      fontWeight: 300,
-                      lineHeight: 1.8,
-                      color: "inherit",
-                      opacity: 0.7,
-                      flexGrow: 1,
-                    }}
-                  >
-                    {service.description}
-                  </p>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      borderTop: "1px solid rgba(227,212,190,0.3)",
-                      paddingTop: "1rem",
-                      marginTop: "1.5rem",
-                    }}
-                  >
-                    <span
-                      className="sans card-price"
-                      style={{
-                        fontFamily: "Georgia, 'Times New Roman', serif",
-                        fontSize: "1.05rem",
-                        fontWeight: 400,
-                        letterSpacing: "0.03em",
-                        color: "var(--taupe)",
-                      }}
-                    >
-                      {service.price}
-                    </span>
-                    <span
-                      className="sans"
-                      style={{
-                        fontSize: "0.65rem",
-                        letterSpacing: "0.15em",
-                        textTransform: "uppercase",
-                        opacity: 0.5,
-                      }}
-                    >
-                      {service.duration}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: "center", marginTop: "3rem" }}>
-            <a href="#contact" className="btn-outline">
-              {dict.services.bookBtn}
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* ABOUT */}
       <section
