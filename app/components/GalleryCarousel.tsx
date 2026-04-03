@@ -11,7 +11,12 @@ const ITEMS = [
   { type: "video" as const, src: "/gallery/g7.mp4" },
 ];
 
-export default function GalleryCarousel() {
+interface Props {
+  ornament: string;
+  title: string;
+}
+
+export default function GalleryCarousel({ ornament, title }: Props) {
   const [current, setCurrent] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -77,7 +82,7 @@ export default function GalleryCarousel() {
             textTransform: "uppercase",
           }}
         >
-          ✦ &nbsp; Mūsu Galerija &nbsp; ✦
+          ✦ &nbsp; {ornament} &nbsp; ✦
         </div>
         <div style={{ width: "40px", height: "1px", background: "rgba(227,212,190,0.3)", margin: "1.2rem auto" }} />
         <h2
@@ -90,7 +95,7 @@ export default function GalleryCarousel() {
             lineHeight: 1.15,
           }}
         >
-          Aizkulises
+          {title}
         </h2>
       </div>
 
