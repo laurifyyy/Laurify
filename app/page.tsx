@@ -695,9 +695,8 @@ export default function LaurifyHomepage() {
             }}
           >
             {[
-              ["10+", dict.hero.stat1],
+              ["5+", dict.hero.stat1],
               ["2,400+", dict.hero.stat2],
-              ["4.98", dict.hero.stat3],
             ].map(([num, label]) => (
               <div key={label}>
                 <div

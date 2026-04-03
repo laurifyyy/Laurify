@@ -17,9 +17,8 @@ export const dictionaries = {
         "Step into a world of pure indulgence. Every visit is your moment — unhurried, considered, and entirely devoted to you.",
       cta1: "Reserve Your Visit",
       cta2: "Explore Services",
-      stat1: "Years of Artistry",
+      stat1: "Years of Experience",
       stat2: "Clients Served",
-      stat3: "Average Rating",
       scroll: "Scroll",
     },
     services: {
@@ -153,9 +152,8 @@ export const dictionaries = {
         "Ienāc pasaulē, kur viss ir par tevi. Katrs apmeklējums — bez steigas, ar rūpību un pilnīgu veltījumu tavam labsajūtam.",
       cta1: "Rezervē savu vizīti",
       cta2: "Apskatīt pakalpojumus",
-      stat1: "Māksliniecības gadi",
+      stat1: "Pieredze",
       stat2: "Apkalpotie klienti",
-      stat3: "Vidējais vērtējums",
       scroll: "Ritināt",
     },
     services: {
@@ -289,9 +287,8 @@ export const dictionaries = {
         "Войдите в мир, где всё посвящено вам. Каждый визит — без спешки, с заботой и полным вниманием к вашему удовольствию.",
       cta1: "Забронировать визит",
       cta2: "Изучить услуги",
-      stat1: "Лет мастерства",
+      stat1: "Лет опыта",
       stat2: "Клиентов обслужено",
-      stat3: "Средний рейтинг",
       scroll: "Прокрутить",
     },
     services: {
