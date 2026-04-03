@@ -1,5 +1,13 @@
 "use client";
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "behold-widget": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & { "feed-id"?: string }, HTMLElement>;
+    }
+  }
+}
+
 import { useState, useEffect, useRef } from "react";
 import { dictionaries, type Lang } from "./i18n";
 
@@ -43,6 +51,13 @@ export default function LaurifyHomepage() {
     icon: "✦",
   }));
   const testimonials = dict.testimonials.items;
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://w.behold.so/widget.js";
+    script.type = "module";
+    document.head.appendChild(script);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -1025,6 +1040,29 @@ export default function LaurifyHomepage() {
                 {dict.about.tag}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INSTAGRAM FEED */}
+      <section style={{ background: "var(--cream)", padding: "6rem 3rem" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+            <div className="ornament sans">✦ &nbsp; Instagram &nbsp; ✦</div>
+            <div className="divider divider-center" />
+            <a
+              href="https://www.instagram.com/laurifybeauty/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sans"
+              style={{ fontSize: "0.75rem", letterSpacing: "0.2em", color: "var(--taupe)", textDecoration: "none", textTransform: "uppercase" }}
+            >
+              @laurifybeauty
+            </a>
+          </div>
+          {/* Behold Instagram widget — replace FEED_ID with your actual Behold feed ID */}
+          <div style={{ borderRadius: "12px", overflow: "hidden" }}>
+            <behold-widget feed-id="FEED_ID" />
           </div>
         </div>
       </section>
