@@ -10,6 +10,8 @@ export default function LaurifyHomepage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [lang, setLang] = useState<Lang>("lv");
+  const [selectedService, setSelectedService] = useState("");
+  const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
@@ -367,10 +369,11 @@ export default function LaurifyHomepage() {
           transition: width 0.3s ease;
         }
         .form-field:focus-within::after { width: 100%; }
-        .form-select-wrap {
+        .custom-dropdown {
+          position: relative;
           margin-bottom: 2rem;
         }
-        .form-select-label {
+        .custom-dropdown-label {
           display: block;
           font-family: 'Gabriel Sans', sans-serif;
           font-size: 0.6rem;
@@ -379,7 +382,7 @@ export default function LaurifyHomepage() {
           color: var(--taupe);
           margin-bottom: 0.5rem;
         }
-        .form-select {
+        .custom-dropdown-trigger {
           width: 100%;
           border: none;
           border-bottom: 1.5px solid var(--beige-mid);
@@ -389,14 +392,43 @@ export default function LaurifyHomepage() {
           color: var(--navy);
           outline: none;
           padding: 0.6rem 1.5rem 0.6rem 0;
-          appearance: none;
           cursor: pointer;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23605952' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-          background-repeat: no-repeat;
-          background-position: right 0.2rem center;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           transition: border-color 0.3s;
+          text-align: left;
         }
-        .form-select:focus { border-color: var(--navy); }
+        .custom-dropdown-trigger:focus,
+        .custom-dropdown-trigger.open { border-color: var(--navy); }
+        .custom-dropdown-trigger .placeholder { color: #a09890; }
+        .custom-dropdown-menu {
+          position: absolute;
+          top: calc(100% + 4px);
+          left: 0;
+          right: 0;
+          background: #fff;
+          border: 1px solid var(--beige-mid);
+          box-shadow: 0 8px 32px rgba(10,31,72,0.10);
+          z-index: 100;
+          overflow: hidden;
+          animation: dropdownIn 0.18s ease;
+        }
+        @keyframes dropdownIn {
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .custom-dropdown-item {
+          font-family: 'Gabriel Sans', sans-serif;
+          font-size: 0.85rem;
+          color: var(--navy);
+          padding: 0.85rem 1rem;
+          cursor: pointer;
+          transition: background 0.15s;
+          border-bottom: 1px solid var(--beige);
+        }
+        .custom-dropdown-item:last-child { border-bottom: none; }
+        .custom-dropdown-item:hover { background: var(--cream); }
       `}</style>
 
       {/* NAV */}
@@ -1222,14 +1254,33 @@ export default function LaurifyHomepage() {
                 <label htmlFor="phone">{dict.contact.phonePlaceholder}</label>
               </div>
 
-              <div className="form-select-wrap">
-                <span className="form-select-label">{dict.contact.selectService}</span>
-                <select className="form-select" defaultValue="">
-                  <option value="" disabled />
-                  {services.map((s) => (
-                    <option key={s.title} value={s.title}>{s.title}</option>
-                  ))}
-                </select>
+              <div className="custom-dropdown">
+                <span className="custom-dropdown-label">{dict.contact.selectService}</span>
+                <button
+                  type="button"
+                  className={`custom-dropdown-trigger${serviceDropdownOpen ? " open" : ""}`}
+                  onClick={() => setServiceDropdownOpen((o) => !o)}
+                >
+                  <span className={selectedService ? "" : "placeholder"}>
+                    {selectedService || dict.contact.selectService}
+                  </span>
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" style={{ flexShrink: 0, transition: "transform 0.2s", transform: serviceDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
+                    <path d="M1 1l5 5 5-5" stroke="#605952" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </button>
+                {serviceDropdownOpen && (
+                  <div className="custom-dropdown-menu">
+                    {services.map((s) => (
+                      <div
+                        key={s.title}
+                        className="custom-dropdown-item"
+                        onClick={() => { setSelectedService(s.title); setServiceDropdownOpen(false); }}
+                      >
+                        {s.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="form-field">
