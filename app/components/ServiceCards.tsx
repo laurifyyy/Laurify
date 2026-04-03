@@ -8,7 +8,7 @@ const SERVICES = [
     subtitle: "Sejas & Ķermeņa",
     gradient: "linear-gradient(160deg, #0a1f48 0%, #0d2454 60%, #1a3a6e 100%)",
     bgImage: "/rf-lifting.jpg",
-    bgPosition: "center 10%",
+    bgPosition: "center top",
     accentColor: "rgba(227,212,190,0.9)",
     areas: ["Kājas", "Ikri", "Vēders", "Sēžamvieta", "Rokas"],
     comingSoon: false,
