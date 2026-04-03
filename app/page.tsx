@@ -794,9 +794,9 @@ export default function LaurifyHomepage() {
               {dict.about.p2}
             </p>
 
-            <a href="#contact" className="btn-light">
+            <button className="btn-light" style={{ border: "1px solid rgba(245,244,228,0.4)" }} onClick={() => setBookingOpen(true)}>
               {dict.about.cta}
-            </a>
+            </button>
           </div>
 
           <div style={{ position: "relative" }}>
@@ -806,7 +806,7 @@ export default function LaurifyHomepage() {
                 aspectRatio: "3/4",
                 position: "relative",
                 overflow: "hidden",
-                border: "2px solid var(--gold)",
+                border: "1px solid var(--gold)",
                 borderRadius: "12px",
               }}
             >
