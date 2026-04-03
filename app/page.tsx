@@ -12,6 +12,8 @@ export default function LaurifyHomepage() {
   const [lang, setLang] = useState<Lang>("lv");
   const [selectedService, setSelectedService] = useState("");
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", notes: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
@@ -1235,22 +1237,30 @@ export default function LaurifyHomepage() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 2rem" }}>
                 <div className="form-field">
-                  <input type="text" placeholder=" " id="firstName" autoComplete="given-name" />
+                  <input type="text" placeholder=" " id="firstName" autoComplete="given-name"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData((p) => ({ ...p, firstName: e.target.value }))} />
                   <label htmlFor="firstName">{dict.contact.firstName}</label>
                 </div>
                 <div className="form-field">
-                  <input type="text" placeholder=" " id="lastName" autoComplete="family-name" />
+                  <input type="text" placeholder=" " id="lastName" autoComplete="family-name"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData((p) => ({ ...p, lastName: e.target.value }))} />
                   <label htmlFor="lastName">{dict.contact.lastName}</label>
                 </div>
               </div>
 
               <div className="form-field">
-                <input type="email" placeholder=" " id="email" autoComplete="email" />
+                <input type="email" placeholder=" " id="email" autoComplete="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} />
                 <label htmlFor="email">{dict.contact.emailPlaceholder}</label>
               </div>
 
               <div className="form-field">
-                <input type="tel" placeholder=" " id="phone" autoComplete="tel" />
+                <input type="tel" placeholder=" " id="phone" autoComplete="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} />
                 <label htmlFor="phone">{dict.contact.phonePlaceholder}</label>
               </div>
 
@@ -1271,11 +1281,8 @@ export default function LaurifyHomepage() {
                 {serviceDropdownOpen && (
                   <div className="custom-dropdown-menu">
                     {services.map((s) => (
-                      <div
-                        key={s.title}
-                        className="custom-dropdown-item"
-                        onClick={() => { setSelectedService(s.title); setServiceDropdownOpen(false); }}
-                      >
+                      <div key={s.title} className="custom-dropdown-item"
+                        onClick={() => { setSelectedService(s.title); setServiceDropdownOpen(false); }}>
                         {s.title}
                       </div>
                     ))}
@@ -1284,12 +1291,48 @@ export default function LaurifyHomepage() {
               </div>
 
               <div className="form-field">
-                <textarea placeholder=" " id="notes" />
+                <textarea placeholder=" " id="notes"
+                  value={formData.notes}
+                  onChange={(e) => setFormData((p) => ({ ...p, notes: e.target.value }))} />
                 <label htmlFor="notes">{dict.contact.notes}</label>
               </div>
 
-              <button className="btn-primary" style={{ width: "100%", border: "none", marginTop: "0.5rem" }}>
-                {dict.contact.submitBtn}
+              {formStatus === "success" && (
+                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#3a7d44", background: "#f0faf1", border: "1px solid #c3e6cb", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
+                  ✓ &nbsp; Pieprasījums nosūtīts! Sazināsimies ar jums drīzumā.
+                </div>
+              )}
+              {formStatus === "error" && (
+                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#842029", background: "#fff2f2", border: "1px solid #f5c2c7", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
+                  ✕ &nbsp; Neizdevās nosūtīt. Lūdzu mēģiniet vēlreiz vai sazinieties pa tālruni.
+                </div>
+              )}
+
+              <button
+                className="btn-primary"
+                style={{ width: "100%", border: "none", marginTop: "0.5rem", opacity: formStatus === "sending" ? 0.7 : 1, cursor: formStatus === "sending" ? "not-allowed" : "pointer" }}
+                disabled={formStatus === "sending"}
+                onClick={async () => {
+                  setFormStatus("sending");
+                  try {
+                    const res = await fetch("/api/contact", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ ...formData, service: selectedService }),
+                    });
+                    if (res.ok) {
+                      setFormStatus("success");
+                      setFormData({ firstName: "", lastName: "", email: "", phone: "", notes: "" });
+                      setSelectedService("");
+                    } else {
+                      setFormStatus("error");
+                    }
+                  } catch {
+                    setFormStatus("error");
+                  }
+                }}
+              >
+                {formStatus === "sending" ? "Sūta..." : dict.contact.submitBtn}
               </button>
             </div>
           </div>
