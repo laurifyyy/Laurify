@@ -10,11 +10,11 @@ export const dictionaries = {
       bookNow: "Book Now",
     },
     hero: {
-      tagline: "Beauty what you deserve",
+      tagline: "Your personal beauty ritual",
       headline1: "Where Beauty",
       headline2: "Becomes Art",
       subtext:
-        "An intimate sanctuary where every ritual is composed with intention. Experience beauty redefined through precision, care, and artistry.",
+        "Step into a world of pure indulgence. Every visit is your moment — unhurried, considered, and entirely devoted to you.",
       cta1: "Reserve Your Visit",
       cta2: "Explore Services",
       stat1: "Years of Artistry",
@@ -146,11 +146,11 @@ export const dictionaries = {
       bookNow: "Rezervēt",
     },
     hero: {
-      tagline: "Skaistums, ko tu pelni",
+      tagline: "Tavs personīgais skaistuma rituāls",
       headline1: "Kur skaistums",
       headline2: "Kļūst par mākslu",
       subtext:
-        "Intīms patvērums, kur katrs rituāls tiek veidots ar nodomu. Pārdzīvo skaistumu no jauna caur precizitāti, rūpēm un māksliniecību.",
+        "Ienāc pasaulē, kur viss ir par tevi. Katrs apmeklējums — bez steigas, ar rūpību un pilnīgu veltījumu tavam labsajūtam.",
       cta1: "Rezervē savu vizīti",
       cta2: "Apskatīt pakalpojumus",
       stat1: "Māksliniecības gadi",
@@ -282,11 +282,11 @@ export const dictionaries = {
       bookNow: "Записаться",
     },
     hero: {
-      tagline: "Красота, которую вы заслуживаете",
+      tagline: "Ваш личный ритуал красоты",
       headline1: "Где красота",
       headline2: "Становится искусством",
       subtext:
-        "Уютное пространство, где каждый ритуал создаётся с намерением. Откройте для себя красоту заново через точность, заботу и мастерство.",
+        "Войдите в мир, где всё посвящено вам. Каждый визит — без спешки, с заботой и полным вниманием к вашему удовольствию.",
       cta1: "Забронировать визит",
       cta2: "Изучить услуги",
       stat1: "Лет мастерства",
