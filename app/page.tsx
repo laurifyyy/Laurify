@@ -833,32 +833,36 @@ export default function LaurifyHomepage() {
                 left: "-2.5rem",
                 background: "var(--gold)",
                 padding: "1.5rem 2rem",
-                maxWidth: "200px",
+                maxWidth: "220px",
               }}
             >
               <div
                 style={{
                   fontFamily: "'La Luxes Serif', serif",
-                  fontSize: "2rem",
+                  fontSize: "1.4rem",
                   fontWeight: 400,
+                  fontStyle: "italic",
                   color: "var(--navy)",
-                  lineHeight: 1,
+                  lineHeight: 1.2,
+                  marginBottom: "0.5rem",
                 }}
               >
-                100%
+                Laura
               </div>
               <div
                 className="sans"
                 style={{
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.12em",
+                  fontSize: "0.6rem",
+                  letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "var(--navy)",
-                  marginTop: "0.4rem",
                   opacity: 0.75,
+                  lineHeight: 1.6,
                 }}
               >
-                {dict.about.tag}
+                Zīmola īpašniece & radītāja
+                <br />
+                Sertificēta speciāliste
               </div>
             </div>
           </div>
