@@ -88,7 +88,7 @@ export default function LaurifyHomepage() {
   return (
     <div
       style={{
-        fontFamily: "'Gabriel Sans', sans-serif",
+        fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
         backgroundColor: "var(--cream)",
         color: "var(--dark)",
         overflowX: "hidden",
@@ -156,10 +156,10 @@ export default function LaurifyHomepage() {
 
         html { scroll-behavior: smooth; }
 
-        .sans { font-family: 'Gabriel Sans', sans-serif; }
+        .sans { font-family: var(--font-raleway), 'Raleway', sans-serif; }
 
         .nav-link {
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-weight: 300;
           font-size: 0.75rem;
           letter-spacing: 0.2em;
@@ -171,7 +171,7 @@ export default function LaurifyHomepage() {
         }
         .nav-link:hover { color: var(--gold); }
         .nav-book-btn {
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-weight: 300;
           font-size: 0.75rem;
           letter-spacing: 0.2em;
@@ -196,7 +196,7 @@ export default function LaurifyHomepage() {
 
         .btn-primary {
           display: inline-block;
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -218,7 +218,7 @@ export default function LaurifyHomepage() {
 
         .btn-outline {
           display: inline-block;
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -239,7 +239,7 @@ export default function LaurifyHomepage() {
 
         .btn-light {
           display: inline-block;
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-weight: 400;
           font-size: 0.7rem;
           letter-spacing: 0.25em;
@@ -324,7 +324,7 @@ export default function LaurifyHomepage() {
           background: none;
           border: none;
           cursor: pointer;
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-size: 0.65rem;
           letter-spacing: 0.15em;
           text-transform: uppercase;
@@ -332,7 +332,7 @@ export default function LaurifyHomepage() {
           transition: color 0.3s;
         }
         .lang-sep {
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-size: 0.55rem;
           opacity: 0.3;
         }
@@ -372,7 +372,7 @@ export default function LaurifyHomepage() {
           position: absolute;
           top: 1.6rem;
           left: 0;
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-size: 0.85rem;
           color: #a09890;
           transition: all 0.22s ease;
@@ -406,7 +406,7 @@ export default function LaurifyHomepage() {
         }
         .custom-dropdown-label {
           display: block;
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-size: 0.6rem;
           letter-spacing: 0.16em;
           text-transform: uppercase;
@@ -418,7 +418,7 @@ export default function LaurifyHomepage() {
           border: none;
           border-bottom: 1.5px solid var(--beige-mid);
           background: transparent;
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-size: 0.9rem;
           color: var(--navy);
           outline: none;
@@ -451,7 +451,7 @@ export default function LaurifyHomepage() {
           to   { opacity: 1; transform: translateY(0); }
         }
         .custom-dropdown-item {
-          font-family: 'Gabriel Sans', sans-serif;
+          font-family: var(--font-raleway), 'Raleway', sans-serif;
           font-size: 0.85rem;
           color: var(--navy);
           padding: 0.85rem 1rem;
@@ -814,7 +814,7 @@ export default function LaurifyHomepage() {
                   <span className="card-icon">{service.icon}</span>
                   <h3
                     style={{
-                      fontFamily: "'Gabriel Sans', sans-serif",
+                      fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
                       fontSize: "0.8rem",
                       fontWeight: 500,
                       letterSpacing: "0.2em",
@@ -1361,12 +1361,12 @@ export default function LaurifyHomepage() {
               </div>
 
               {formStatus === "success" && (
-                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#3a7d44", background: "#f0faf1", border: "1px solid #c3e6cb", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
+                <div style={{ fontFamily: "var(--font-raleway), 'Raleway', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#3a7d44", background: "#f0faf1", border: "1px solid #c3e6cb", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
                   ✓ &nbsp; Pieprasījums nosūtīts! Sazināsimies ar jums drīzumā.
                 </div>
               )}
               {formStatus === "error" && (
-                <div style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#842029", background: "#fff2f2", border: "1px solid #f5c2c7", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
+                <div style={{ fontFamily: "var(--font-raleway), 'Raleway', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", color: "#842029", background: "#fff2f2", border: "1px solid #f5c2c7", borderRadius: "8px", padding: "1rem 1.2rem", marginBottom: "1rem" }}>
                   ✕ &nbsp; Neizdevās nosūtīt. Lūdzu mēģiniet vēlreiz vai sazinieties pa tālruni.
                 </div>
               )}

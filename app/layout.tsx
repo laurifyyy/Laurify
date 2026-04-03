@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
+import { Raleway } from "next/font/google";
 import "./globals.css";
+
+const raleway = Raleway({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 const siteUrl = "https://laurify.lv";
 
@@ -80,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="lv" className="h-full antialiased">
+    <html lang="lv" className={`h-full antialiased ${raleway.variable}`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
