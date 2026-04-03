@@ -277,13 +277,22 @@ export default function LaurifyHomepage() {
           opacity: 0.3;
         }
 
-        @media (max-width: 768px) {
-          .hero-headline { font-size: 3rem !important; }
-          .services-grid { grid-template-columns: 1fr !important; }
+        @media (max-width: 1024px) {
           .about-grid { grid-template-columns: 1fr !important; }
           .contact-grid { grid-template-columns: 1fr !important; }
+        }
+
+        @media (max-width: 768px) {
+          .hero-headline { font-size: 2.6rem !important; }
+          .services-grid { grid-template-columns: 1fr !important; }
           .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .mobile-hidden { display: none !important; }
+          .nav-links { display: none !important; }
+          .section-padding { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+        }
+
+        @media (max-width: 480px) {
+          .hero-headline { font-size: 2rem !important; }
         }
 
         .form-field {
@@ -413,8 +422,8 @@ export default function LaurifyHomepage() {
           zIndex: 100,
           paddingTop: navScrolled ? "max(1rem, env(safe-area-inset-top))" : "max(1.8rem, env(safe-area-inset-top))",
           paddingBottom: navScrolled ? "1rem" : "1.8rem",
-          paddingLeft: "max(3rem, env(safe-area-inset-left))",
-          paddingRight: "max(3rem, env(safe-area-inset-right))",
+          paddingLeft: "max(clamp(1.2rem, 4vw, 3rem), env(safe-area-inset-left))",
+          paddingRight: "max(clamp(1.2rem, 4vw, 3rem), env(safe-area-inset-right))",
           background: navScrolled ? "rgba(245,244,228,0.97)" : "transparent",
           borderBottom: navScrolled ? "1px solid var(--beige)" : "none",
           backdropFilter: navScrolled ? "blur(12px)" : "none",
@@ -720,7 +729,7 @@ export default function LaurifyHomepage() {
         id="about"
         style={{
           background: "var(--navy)",
-          padding: "8rem 3rem",
+          padding: "clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -911,7 +920,7 @@ export default function LaurifyHomepage() {
       <GalleryCarousel />
 
       {/* GOOGLE REVIEWS */}
-      <section style={{ background: "var(--cream)", padding: "6rem 3rem" }}>
+      <section style={{ background: "var(--cream)", padding: "clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div className="ornament sans">✦ &nbsp; Google Atsauksmes &nbsp; ✦</div>
@@ -926,7 +935,7 @@ export default function LaurifyHomepage() {
         id="contact"
         style={{
           background: "var(--cream)",
-          padding: "8rem 3rem",
+          padding: "clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem)",
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
