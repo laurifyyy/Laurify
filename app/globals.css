@@ -48,6 +48,29 @@ body {
   }
 }
 
+/* Gallery carousel */
+.gallery-track {
+  width: 100%;
+  max-width: 900px;
+}
+.gallery-item-wrap {
+  width: 260px;
+  height: 460px;
+}
+@media (max-width: 768px) {
+  .gallery-track {
+    max-width: 100%;
+  }
+  .gallery-item-wrap {
+    width: 80vw;
+    height: 142vw;
+  }
+  .gallery-item-wrap:first-child,
+  .gallery-item-wrap:last-child {
+    display: none;
+  }
+}
+
 .instagram-section {
   padding: 6rem 3rem;
 }

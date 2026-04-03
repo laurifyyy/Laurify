@@ -4,12 +4,12 @@
 import { useState, useEffect, useRef } from "react";
 import { dictionaries, type Lang } from "./i18n";
 import ServiceCards from "./components/ServiceCards";
+import GalleryCarousel from "./components/GalleryCarousel";
 
 
 export default function LaurifyHomepage() {
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [lang, setLang] = useState<Lang>("lv");
   const [bookingOpen, setBookingOpen] = useState(false);
   const [contactForm, setContactForm] = useState({ name: "", contact: "", message: "" });
@@ -26,7 +26,6 @@ export default function LaurifyHomepage() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
-  const testimonials = dict.testimonials.items;
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -50,23 +49,12 @@ export default function LaurifyHomepage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
-
-  useEffect(() => {
-    setActiveTestimonial(0);
-  }, [lang]);
-
   const navScrolled = scrollY > 60;
 
   const navLinks = [
     { label: dict.nav.services, href: "#services" },
     { label: dict.nav.about, href: "#about" },
-    { label: dict.nav.testimonials, href: "#testimonials" },
+    { label: "Galerija", href: "#gallery" },
     { label: dict.nav.contact, href: "#contact" },
   ];
 
@@ -915,136 +903,8 @@ export default function LaurifyHomepage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section
-        id="testimonials"
-        style={{
-          background: "var(--beige)",
-          padding: "8rem 3rem",
-          textAlign: "center",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontFamily: "'La Luxes Serif', serif",
-            fontSize: "clamp(10rem, 20vw, 24rem)",
-            fontWeight: 400,
-            color: "rgba(10,31,72,0.03)",
-            pointerEvents: "none",
-            userSelect: "none",
-            lineHeight: 1,
-          }}
-        >
-          "
-        </div>
-
-        <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative" }}>
-          <div className="ornament sans">✦ &nbsp; {dict.testimonials.ornament} &nbsp; ✦</div>
-          <div className="divider divider-center" />
-          <h2
-            style={{
-              fontFamily: "'La Luxes Serif', serif",
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              fontWeight: 400,
-              fontStyle: "italic",
-              color: "var(--navy)",
-              marginBottom: "4rem",
-            }}
-          >
-            {dict.testimonials.title}
-          </h2>
-
-          <div
-            style={{
-              minHeight: "180px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "'La Luxes Serif', serif",
-                fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)",
-                fontWeight: 400,
-                fontStyle: "italic",
-                lineHeight: 1.6,
-                color: "var(--navy)",
-                transition: "all 0.6s ease",
-              }}
-            >
-              &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
-            </p>
-          </div>
-
-          <div style={{ marginTop: "2.5rem" }}>
-            <div
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-                background: "var(--navy)",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "'La Luxes Serif', serif",
-                fontSize: "0.85rem",
-                color: "var(--gold)",
-                marginBottom: "0.8rem",
-              }}
-            >
-              {testimonials[activeTestimonial].initials}
-            </div>
-            <div
-              style={{
-                fontFamily: "'La Luxes Serif', serif",
-                fontSize: "1.05rem",
-                fontWeight: 500,
-                color: "var(--navy)",
-              }}
-            >
-              {testimonials[activeTestimonial].name}
-            </div>
-            <div
-              className="sans"
-              style={{
-                fontSize: "0.7rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#605952",
-                marginTop: "0.3rem",
-              }}
-            >
-              {testimonials[activeTestimonial].role}
-            </div>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "0.6rem",
-              justifyContent: "center",
-              marginTop: "2rem",
-            }}
-          >
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                className={`testimonial-dot ${i === activeTestimonial ? "active" : ""}`}
-                onClick={() => setActiveTestimonial(i)}
-                aria-label={`Testimonial ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* GALLERY */}
+      <GalleryCarousel />
 
       {/* GOOGLE REVIEWS */}
       <section style={{ background: "var(--cream)", padding: "6rem 3rem" }}>
