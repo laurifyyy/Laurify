@@ -617,9 +617,9 @@ export default function LaurifyHomepage() {
               flexWrap: "wrap",
             }}
           >
-            <a href="#contact" className="btn-primary">
+            <button className="btn-primary" style={{ border: "none" }} onClick={() => setBookingOpen(true)}>
               {dict.hero.cta1}
-            </a>
+            </button>
             <a href="#services" className="btn-light">
               {dict.hero.cta2}
             </a>
