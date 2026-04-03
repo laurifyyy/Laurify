@@ -10,6 +10,12 @@ const raleway = Raleway({
 
 const siteUrl = "https://laurify.lv";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {

@@ -411,7 +411,10 @@ export default function LaurifyHomepage() {
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: navScrolled ? "1rem 3rem" : "1.8rem 3rem",
+          paddingTop: navScrolled ? "max(1rem, env(safe-area-inset-top))" : "max(1.8rem, env(safe-area-inset-top))",
+          paddingBottom: navScrolled ? "1rem" : "1.8rem",
+          paddingLeft: "max(3rem, env(safe-area-inset-left))",
+          paddingRight: "max(3rem, env(safe-area-inset-right))",
           background: navScrolled ? "rgba(245,244,228,0.97)" : "transparent",
           borderBottom: navScrolled ? "1px solid var(--beige)" : "none",
           backdropFilter: navScrolled ? "blur(12px)" : "none",
@@ -538,28 +541,25 @@ export default function LaurifyHomepage() {
           }}
         />
 
-        {/* Large decorative letters stacked on vertical line */}
+        {/* Vertical LAURIFY text on decorative line */}
         <div
           className="mobile-hidden"
           style={{
             position: "absolute",
             right: "12%",
             top: "50%",
-            transform: "translate(50%, -50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            transform: "translate(50%, -50%) rotate(90deg)",
             fontFamily: "'La Luxes Serif', serif",
-            fontSize: "clamp(8rem, 13vw, 16rem)",
+            fontSize: "clamp(1.8rem, 2.5vw, 3rem)",
             fontWeight: 400,
+            letterSpacing: "0.35em",
             color: "rgba(227,212,190,0.06)",
-            lineHeight: 0.9,
+            whiteSpace: "nowrap",
             userSelect: "none",
             pointerEvents: "none",
           }}
         >
-          <span>L</span>
-          <span>A</span>
+          LAURIFY
         </div>
 
         <div
