@@ -47,9 +47,9 @@ export default function LaurifyHomepage() {
   ];
 
   const contactInfo = [
-    { label: dict.contact.address, value: "12 Elizabetes iela, Riga, LV-1010" },
-    { label: dict.contact.phone, value: "+371 67 123 456" },
-    { label: dict.contact.email, value: "hello@laurify.com" },
+    { label: dict.contact.address, value: "Kr. Valdemāra iela 149, Rīga, LV-1013" },
+    { label: dict.contact.phone, value: "+371 20 169 091" },
+    { label: dict.contact.email, value: "beauty@laurify.lv" },
     { label: dict.contact.hours, value: dict.contact.hoursValue },
   ];
 
