@@ -16,6 +16,10 @@ export default function LaurifyHomepage() {
   const emptyForm: FormData = { firstName: "", lastName: "", email: "", phone: "", notes: "" };
   const [formData, setFormData] = useState<FormData>(emptyForm);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [fieldErrors, setFieldErrors] = useState<{ email?: string; phone?: string }>({});
+
+  const validateEmail = (v: string) => v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Lūdzu ievadi derīgu e-pasta adresi (piemēram: vards@domens.lv)" : undefined;
+  const validatePhone = (v: string) => v && !/^[+]?[\d\s\-().]{7,}$/.test(v) ? "Lūdzu ievadi derīgu tālruņa numuru (piemēram: +371 20 000 000)" : undefined;
 
   useEffect(() => {
     try {
@@ -1270,15 +1274,19 @@ export default function LaurifyHomepage() {
               <div className="form-field">
                 <input type="email" placeholder=" " id="email" autoComplete="email"
                   value={formData.email}
-                  onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} />
+                  onChange={(e) => { setFormData((p) => ({ ...p, email: e.target.value })); setFieldErrors((p) => ({ ...p, email: undefined })); }}
+                  onBlur={(e) => setFieldErrors((p) => ({ ...p, email: validateEmail(e.target.value) }))} />
                 <label htmlFor="email">{dict.contact.emailPlaceholder}</label>
+                {fieldErrors.email && <span style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.65rem", letterSpacing: "0.08em", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.email}</span>}
               </div>
 
               <div className="form-field">
                 <input type="tel" placeholder=" " id="phone" autoComplete="tel"
                   value={formData.phone}
-                  onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} />
+                  onChange={(e) => { setFormData((p) => ({ ...p, phone: e.target.value })); setFieldErrors((p) => ({ ...p, phone: undefined })); }}
+                  onBlur={(e) => setFieldErrors((p) => ({ ...p, phone: validatePhone(e.target.value) }))} />
                 <label htmlFor="phone">{dict.contact.phonePlaceholder}</label>
+                {fieldErrors.phone && <span style={{ fontFamily: "'Gabriel Sans', sans-serif", fontSize: "0.65rem", letterSpacing: "0.08em", color: "#b91c1c", marginTop: "0.35rem", display: "block" }}>{fieldErrors.phone}</span>}
               </div>
 
               <div className="custom-dropdown">
@@ -1330,6 +1338,12 @@ export default function LaurifyHomepage() {
                 style={{ width: "100%", border: "none", marginTop: "0.5rem", opacity: formStatus === "sending" ? 0.7 : 1, cursor: formStatus === "sending" ? "not-allowed" : "pointer" }}
                 disabled={formStatus === "sending"}
                 onClick={async () => {
+                  const emailErr = validateEmail(formData.email);
+                  const phoneErr = validatePhone(formData.phone);
+                  if (emailErr || phoneErr) {
+                    setFieldErrors({ email: emailErr, phone: phoneErr });
+                    return;
+                  }
                   setFormStatus("sending");
                   try {
                     const res = await fetch("/api/contact", {
