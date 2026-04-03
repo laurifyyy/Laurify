@@ -1332,13 +1332,27 @@ export default function LaurifyHomepage() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   style={{
-                    color: "rgba(245,244,228,0.45)",
-                    transition: "color 0.3s",
+                    color: "var(--cream)",
+                    background: "rgba(245,244,228,0.1)",
+                    border: "1px solid rgba(245,244,228,0.2)",
+                    borderRadius: "8px",
+                    width: "40px",
+                    height: "40px",
                     display: "flex",
                     alignItems: "center",
+                    justifyContent: "center",
+                    transition: "all 0.3s ease",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,244,228,0.45)")}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "var(--navy)";
+                    e.currentTarget.style.background = "var(--gold)";
+                    e.currentTarget.style.borderColor = "var(--gold)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "var(--cream)";
+                    e.currentTarget.style.background = "rgba(245,244,228,0.1)";
+                    e.currentTarget.style.borderColor = "rgba(245,244,228,0.2)";
+                  }}
                 >
                   {svg}
                 </a>
