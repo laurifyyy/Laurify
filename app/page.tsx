@@ -138,6 +138,29 @@ export default function LaurifyHomepage() {
           cursor: pointer;
         }
         .nav-link:hover { color: var(--gold); }
+        .nav-book-btn {
+          font-family: 'Gabriel Sans', sans-serif;
+          font-weight: 300;
+          font-size: 0.75rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(245,244,228,0.5);
+          color: var(--cream);
+          padding: 0.55rem 1.4rem;
+          background: transparent;
+        }
+        .nav-book-btn[data-scrolled="true"] {
+          border-color: var(--navy);
+          color: var(--navy);
+        }
+        .nav-book-btn:hover {
+          background: var(--gold);
+          color: var(--navy);
+          border-color: var(--gold);
+        }
 
         .btn-primary {
           display: inline-block;
@@ -449,12 +472,8 @@ export default function LaurifyHomepage() {
 
           <a
             href="#contact"
-            className="nav-link"
-            style={{
-              color: navScrolled ? "var(--navy)" : "var(--cream)",
-              border: `1px solid ${navScrolled ? "var(--navy)" : "rgba(245,244,228,0.5)"}`,
-              padding: "0.55rem 1.4rem",
-            }}
+            className="nav-book-btn"
+            data-scrolled={navScrolled ? "true" : "false"}
           >
             {dict.nav.bookNow}
           </a>
@@ -888,59 +907,28 @@ export default function LaurifyHomepage() {
           </div>
 
           <div style={{ position: "relative" }}>
-            {/* Decorative image placeholder with pattern */}
+            {/* About photo */}
             <div
               style={{
                 aspectRatio: "3/4",
-                background: "linear-gradient(135deg, #0A1F48 0%, #0D2454 100%)",
-                border: "1px solid rgba(227,212,190,0.25)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 position: "relative",
                 overflow: "hidden",
+                border: "1px solid rgba(227,212,190,0.25)",
               }}
             >
-              {/* Abstract geometric decoration */}
-              <div
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/about-photo.jpg"
+                alt="Laurify luxury beauty"
                 style={{
-                  position: "absolute",
-                  inset: "2rem",
-                  border: "1px solid rgba(227,212,190,0.15)",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                  filter: "grayscale(100%)",
+                  display: "block",
                 }}
               />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: "3.5rem",
-                  border: "1px solid rgba(227,212,190,0.08)",
-                }}
-              />
-              <div style={{ textAlign: "center", padding: "2rem" }}>
-                <div
-                  style={{
-                    fontFamily: "'La Luxes Serif', serif",
-                    fontSize: "5rem",
-                    fontWeight: 400,
-                    color: "rgba(227,212,190,0.3)",
-                    lineHeight: 1,
-                    marginBottom: "1rem",
-                  }}
-                >
-                  L
-                </div>
-                <div
-                  className="sans"
-                  style={{
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.35em",
-                    textTransform: "uppercase",
-                    color: "rgba(227,212,190,0.4)",
-                  }}
-                >
-                  Est. 2014 · Riga
-                </div>
-              </div>
             </div>
 
             {/* Floating accent card */}
