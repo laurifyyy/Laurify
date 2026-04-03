@@ -91,9 +91,7 @@ export default function ServiceCards({ onBook }: Props) {
                 onMouseEnter={() => setHovered(service.id)}
                 onMouseLeave={() => setHovered(null)}
                 style={{
-                  background: service.bgImage
-                    ? `url(${service.bgImage}) center/cover no-repeat`
-                    : service.gradient,
+                  background: service.gradient,
                   transform: isHovered ? "scale(1.02)" : "scale(1)",
                   boxShadow: isHovered
                     ? "0 24px 64px rgba(10,31,72,0.35)"
@@ -101,18 +99,29 @@ export default function ServiceCards({ onBook }: Props) {
                   cursor: service.comingSoon ? "default" : "pointer",
                 }}
               >
-                {/* Gradient overlay — fades to darker on hover */}
+                {/* Background image (fades in on hover) */}
+                {service.bgImage && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      backgroundImage: `url(${service.bgImage})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      opacity: isHovered ? 0.45 : 0.2,
+                      transition: "opacity 0.5s ease",
+                    }}
+                  />
+                )}
+
+                {/* Texture overlay */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: service.bgImage
-                      ? isHovered
-                        ? "rgba(30,10,60,0.72)"
-                        : "rgba(30,10,60,0.45)"
-                      : isHovered
-                        ? "rgba(0,0,0,0.45)"
-                        : "rgba(0,0,0,0.15)",
+                    background: isHovered
+                      ? "rgba(0,0,0,0.45)"
+                      : "rgba(0,0,0,0.15)",
                     transition: "background 0.4s ease",
                   }}
                 />
