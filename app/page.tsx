@@ -1284,10 +1284,66 @@ export default function LaurifyHomepage() {
                 lineHeight: 1.9,
                 color: "rgba(245,244,228,0.45)",
                 maxWidth: "220px",
+                marginBottom: "1.5rem",
               }}
             >
               {dict.footer.tagline}
             </p>
+
+            {/* Social icons */}
+            <div style={{ display: "flex", gap: "1rem" }}>
+              {[
+                {
+                  href: "https://www.instagram.com/laurifybeauty/",
+                  label: "Instagram @laurifybeauty",
+                  svg: (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                      <circle cx="12" cy="12" r="4"/>
+                      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                  ),
+                },
+                {
+                  href: "https://www.instagram.com/laurifybeauty.jelgava/",
+                  label: "Instagram @laurifybeauty.jelgava",
+                  svg: (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                      <circle cx="12" cy="12" r="4"/>
+                      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                  ),
+                },
+                {
+                  href: "https://www.facebook.com/laurifybeauty",
+                  label: "Facebook",
+                  svg: (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                  ),
+                },
+              ].map(({ href, label, svg }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  style={{
+                    color: "rgba(245,244,228,0.45)",
+                    transition: "color 0.3s",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,244,228,0.45)")}
+                >
+                  {svg}
+                </a>
+              ))}
+            </div>
           </div>
 
           {[dict.footer.col1, dict.footer.col2, dict.footer.col3].map(({ title, links }) => (
