@@ -7,7 +7,7 @@ const SERVICES = [
     title: "RF Lifting",
     subtitle: "Sejas & Ķermeņa",
     gradient: "linear-gradient(160deg, #0a1f48 0%, #0d2454 60%, #1a3a6e 100%)",
-    bgImage: null,
+    bgImage: "/rf-lifting.jpg",
     accentColor: "rgba(227,212,190,0.9)",
     areas: ["Kājas", "Ikri", "Vēders", "Sēžamvieta", "Rokas"],
     comingSoon: false,
