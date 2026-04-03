@@ -7,6 +7,7 @@ const SERVICES = [
     title: "RF Lifting",
     subtitle: "Sejas & Ķermeņa",
     gradient: "linear-gradient(160deg, #0a1f48 0%, #0d2454 60%, #1a3a6e 100%)",
+    bgImage: null,
     accentColor: "rgba(227,212,190,0.9)",
     areas: ["Kājas", "Ikri", "Vēders", "Sēžamvieta", "Rokas"],
     comingSoon: false,
@@ -16,6 +17,7 @@ const SERVICES = [
     title: "Zelta Ietīšana",
     subtitle: "Ķermeņa Procedūra",
     gradient: "linear-gradient(160deg, #2a1a00 0%, #5c3d00 50%, #8a5e00 100%)",
+    bgImage: null,
     accentColor: "rgba(227,212,190,0.9)",
     areas: ["Pilns ķermenis", "Vēders", "Kājas", "Rokas"],
     comingSoon: false,
@@ -25,6 +27,7 @@ const SERVICES = [
     title: "Lāzera Depilācija",
     subtitle: "Drīzumā",
     gradient: "linear-gradient(160deg, #1a0a2e 0%, #2d1054 50%, #3d1a6e 100%)",
+    bgImage: "/laser.jpg",
     accentColor: "rgba(200,180,255,0.8)",
     areas: ["Rokas", "Pilnas kājas", "Mugura", "Paduses", "Bikini", "Pilns bikini"],
     comingSoon: true,
@@ -96,6 +99,21 @@ export default function ServiceCards({ onBook }: Props) {
                   cursor: service.comingSoon ? "default" : "pointer",
                 }}
               >
+                {/* Background image (fades in on hover) */}
+                {service.bgImage && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      backgroundImage: `url(${service.bgImage})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      opacity: isHovered ? 0.35 : 0,
+                      transition: "opacity 0.5s ease",
+                    }}
+                  />
+                )}
+
                 {/* Texture overlay */}
                 <div
                   style={{
