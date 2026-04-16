@@ -12,6 +12,8 @@ export default function GalleryTab() {
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [hasUnsaved, setHasUnsaved] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState<Item | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -87,30 +89,31 @@ export default function GalleryTab() {
     setItems(reordered);
     setDragIdx(null);
     setDragOverIdx(null);
-    saveOrder(reordered);
+    setHasUnsaved(true);
   }
   function onItemDragEnd() {
     setDragIdx(null);
     setDragOverIdx(null);
   }
 
-  async function saveOrder(ordered: Item[]) {
+  async function saveOrder() {
     setSaving(true);
     await fetch("/api/admin/gallery", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ orders: ordered.map((it, i) => ({ id: it.id, order: i })) }),
+      body: JSON.stringify({ orders: items.map((it, i) => ({ id: it.id, order: i })) }),
     });
     setSaving(false);
+    setHasUnsaved(false);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
   }
 
   return (
     <div>
       {/* Header */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
-        <h2 style={{ fontSize: "1.2rem", color: "#0A1F48", margin: 0 }}>
-          Galerija {saving && <span style={{ fontSize: "0.7rem", color: "#888", fontWeight: 400 }}>Saglabā secību...</span>}
-        </h2>
+        <h2 style={{ fontSize: "1.2rem", color: "#0A1F48", margin: 0 }}>Galerija</h2>
         <label style={{
           background: uploading ? "#555" : "#0A1F48", color: "#fff", padding: "0.6rem 1.2rem", borderRadius: "8px",
           cursor: uploading ? "not-allowed" : "pointer", fontSize: "0.8rem", letterSpacing: "0.1em",
@@ -189,7 +192,7 @@ export default function GalleryTab() {
                   <button
                     onClick={e => { e.stopPropagation(); setConfirmDelete(item); }}
                     title="Dzēst"
-                    style={{ position: "absolute", top: "6px", right: "6px", background: "#e74c3c", border: "2px solid #fff", color: "#fff", borderRadius: "50%", width: "28px", height: "28px", cursor: "pointer", fontSize: "1rem", lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 6px rgba(0,0,0,0.3)", transition: "background 0.15s" }}
+                    style={{ position: "absolute", top: "6px", right: "6px", background: "#e74c3c", border: "none", color: "#fff", borderRadius: "50%", width: "28px", height: "28px", cursor: "pointer", fontSize: "1rem", lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 6px rgba(0,0,0,0.3)", transition: "background 0.15s" }}
                     onMouseEnter={e => (e.currentTarget.style.background = "#c0392b")}
                     onMouseLeave={e => (e.currentTarget.style.background = "#e74c3c")}
                   >✕</button>
@@ -208,6 +211,34 @@ export default function GalleryTab() {
           </div>
         </>
       )}
+      {/* Floating save button */}
+      {(hasUnsaved || saving || saved) && (
+        <div style={{ position: "fixed", bottom: "2rem", right: "2rem", zIndex: 500 }}>
+          <button
+            onClick={saveOrder}
+            disabled={saving || saved}
+            style={{
+              background: saved ? "#27ae60" : "#0A1F48",
+              color: "#fff",
+              border: "none",
+              borderRadius: "12px",
+              padding: "0.85rem 2rem",
+              fontSize: "0.85rem",
+              fontWeight: 600,
+              letterSpacing: "0.08em",
+              cursor: saving || saved ? "default" : "pointer",
+              boxShadow: "0 8px 32px rgba(10,31,72,0.3)",
+              transition: "background 0.3s",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+          >
+            {saved ? "✓ Saglabāts" : saving ? "Saglabā..." : "💾 Saglabāt secību"}
+          </button>
+        </div>
+      )}
+
       {/* Delete confirm modal */}
       {confirmDelete && (
         <div
