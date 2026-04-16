@@ -12,6 +12,7 @@ export default function GalleryTab() {
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState<Item | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { fetchItems(); }, []);
@@ -50,8 +51,8 @@ export default function GalleryTab() {
   }
 
   async function deleteItem(id: string) {
-    if (!confirm("Dzēst šo vienumu?")) return;
     await fetch(`/api/admin/gallery/${id}`, { method: "DELETE" });
+    setConfirmDelete(null);
     fetchItems();
   }
 
@@ -186,9 +187,12 @@ export default function GalleryTab() {
                     <video src={item.url} style={{ width: "100%", height: "100%", objectFit: "cover" }} muted />
                   )}
                   <button
-                    onClick={e => { e.stopPropagation(); deleteItem(item.id); }}
-                    style={{ position: "absolute", top: "6px", right: "6px", background: "rgba(0,0,0,0.6)", border: "none", color: "#fff", borderRadius: "50%", width: "26px", height: "26px", cursor: "pointer", fontSize: "0.9rem", lineHeight: 1 }}
-                  >×</button>
+                    onClick={e => { e.stopPropagation(); setConfirmDelete(item); }}
+                    title="Dzēst"
+                    style={{ position: "absolute", top: "6px", right: "6px", background: "#e74c3c", border: "2px solid #fff", color: "#fff", borderRadius: "50%", width: "28px", height: "28px", cursor: "pointer", fontSize: "1rem", lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 6px rgba(0,0,0,0.3)", transition: "background 0.15s" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#c0392b")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "#e74c3c")}
+                  >✕</button>
                   {/* Drag handle indicator */}
                   <div style={{ position: "absolute", top: "6px", left: "6px", color: "rgba(255,255,255,0.7)", fontSize: "0.8rem", lineHeight: 1, userSelect: "none" }}>⠿</div>
                 </div>
@@ -203,6 +207,41 @@ export default function GalleryTab() {
             )}
           </div>
         </>
+      )}
+      {/* Delete confirm modal */}
+      {confirmDelete && (
+        <div
+          onClick={() => setConfirmDelete(null)}
+          style={{ position: "fixed", inset: 0, background: "rgba(10,31,72,0.5)", backdropFilter: "blur(4px)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{ background: "#fff", borderRadius: "16px", padding: "2rem", maxWidth: "380px", width: "100%", boxShadow: "0 32px 80px rgba(10,31,72,0.25)", textAlign: "center" }}
+          >
+            <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#fdf0ef", border: "2px solid #e74c3c", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.2rem", fontSize: "1.4rem" }}>✕</div>
+            <h3 style={{ fontSize: "1rem", color: "#0A1F48", margin: "0 0 0.5rem", fontWeight: 600 }}>Dzēst vienumu?</h3>
+            <p style={{ fontSize: "0.82rem", color: "#888", margin: "0 0 0.4rem" }}>
+              <strong style={{ color: "#333" }}>{confirmDelete.title}</strong>
+            </p>
+            <p style={{ fontSize: "0.78rem", color: "#aaa", margin: "0 0 1.8rem" }}>Šo darbību nevar atsaukt.</p>
+            <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center" }}>
+              <button
+                onClick={() => setConfirmDelete(null)}
+                style={{ padding: "0.65rem 1.5rem", borderRadius: "8px", border: "1px solid #e0e0e0", background: "#f7f7f5", color: "#555", fontSize: "0.8rem", cursor: "pointer", fontWeight: 500 }}
+              >
+                Atcelt
+              </button>
+              <button
+                onClick={() => deleteItem(confirmDelete.id)}
+                style={{ padding: "0.65rem 1.5rem", borderRadius: "8px", border: "none", background: "#e74c3c", color: "#fff", fontSize: "0.8rem", cursor: "pointer", fontWeight: 600, letterSpacing: "0.05em" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#c0392b")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#e74c3c")}
+              >
+                Dzēst
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
