@@ -26,6 +26,18 @@ export default function LaurifyHomepage() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   const dict = dictionaries[lang];
+  const [dbOverrides, setDbOverrides] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    fetch(`/api/content?lang=${lang}`)
+      .then(r => r.json())
+      .then(setDbOverrides)
+      .catch(() => {});
+  }, [lang]);
+
+  function ov(key: string, fallback: string): string {
+    return dbOverrides[key] || fallback;
+  }
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -62,7 +74,7 @@ export default function LaurifyHomepage() {
     { label: dict.contact.address, value: "Vienības gatve 109, Rīga, LV-1058" },
     { label: dict.contact.phone, value: "+371 20 169 091" },
     { label: dict.contact.email, value: "beauty@laurify.lv" },
-    { label: dict.contact.hours, value: dict.contact.hoursValue },
+    { label: dict.contact.hours, value: ov("contact.hoursValue", dict.contact.hoursValue) },
   ];
 
   return (
@@ -617,7 +629,7 @@ export default function LaurifyHomepage() {
               maxWidth: "400px",
             }}
           >
-            {dict.hero.subtext}
+            {ov("hero.subtext", dict.hero.subtext)}
           </p>
 
           <div
@@ -791,7 +803,7 @@ export default function LaurifyHomepage() {
                 marginBottom: "1.2rem",
               }}
             >
-              {dict.about.p1}
+              {ov("about.p1", dict.about.p1)}
             </p>
             <p
               className="sans"
@@ -803,7 +815,7 @@ export default function LaurifyHomepage() {
                 marginBottom: "2.5rem",
               }}
             >
-              {dict.about.p2}
+              {ov("about.p2", dict.about.p2)}
             </p>
 
             <button className="btn-light" style={{ border: "1px solid rgba(245,244,228,0.4)" }} onClick={() => setBookingOpen(true)}>
