@@ -1,10 +1,7 @@
 import { auth } from "@/auth";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+import { put } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-
-const prisma = new PrismaClient();
 
 export async function GET() {
   const session = await auth();
@@ -25,21 +22,13 @@ export async function POST(req: NextRequest) {
 
   if (!file) return NextResponse.json({ error: "No file" }, { status: 400 });
 
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
-  await mkdir(uploadDir, { recursive: true });
-
-  const ext = file.name.split(".").pop();
-  const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-  await writeFile(path.join(uploadDir, filename), buffer);
+  const blob = await put(file.name, file, { access: "public" });
 
   const maxOrder = await prisma.galleryItem.aggregate({ _max: { order: true } });
   const order = (maxOrder._max.order ?? -1) + 1;
 
   const item = await prisma.galleryItem.create({
-    data: { title, type, url: `/uploads/${filename}`, order },
+    data: { title, type, url: blob.url, order },
   });
 
   return NextResponse.json(item);
