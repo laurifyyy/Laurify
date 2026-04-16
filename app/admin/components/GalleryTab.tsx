@@ -7,6 +7,7 @@ export default function GalleryTab() {
   const [items, setItems] = useState<Item[]>([]);
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   useEffect(() => { fetchItems(); }, []);
 
@@ -22,12 +23,22 @@ export default function GalleryTab() {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
-    const form = new FormData();
-    form.append("file", file);
-    form.append("title", file.name.replace(/\.[^.]+$/, ""));
-    form.append("type", file.type.startsWith("video") ? "video" : "image");
-    await fetch("/api/admin/gallery", { method: "POST", body: form });
-    await fetchItems();
+    setUploadError(null);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      form.append("title", file.name.replace(/\.[^.]+$/, ""));
+      form.append("type", file.type.startsWith("video") ? "video" : "image");
+      const res = await fetch("/api/admin/gallery", { method: "POST", body: form });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        setUploadError(err.error || `Kļūda: ${res.status}`);
+      } else {
+        await fetchItems();
+      }
+    } catch (err) {
+      setUploadError(`Savienojuma kļūda: ${err}`);
+    }
     setUploading(false);
     e.target.value = "";
   }
@@ -51,6 +62,11 @@ export default function GalleryTab() {
           <input type="file" accept="image/*,video/*" onChange={handleUpload} style={{ display: "none" }} disabled={uploading} />
         </label>
       </div>
+      {uploadError && (
+        <p style={{ color: "#c0392b", fontSize: "0.8rem", marginBottom: "1rem", background: "#fdf0ef", padding: "0.7rem 1rem", borderRadius: "6px" }}>
+          ⚠ {uploadError}
+        </p>
+      )}
 
       {loading ? (
         <p style={{ color: "#888" }}>Ielādē...</p>
