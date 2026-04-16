@@ -11,6 +11,17 @@ export async function GET() {
   return NextResponse.json(items);
 }
 
+export async function PATCH(req: NextRequest) {
+  const session = await auth();
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { orders } = await req.json() as { orders: { id: string; order: number }[] };
+  await Promise.all(orders.map(({ id, order }) =>
+    prisma.galleryItem.update({ where: { id }, data: { order } })
+  ));
+  return NextResponse.json({ ok: true });
+}
+
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

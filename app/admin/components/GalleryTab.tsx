@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type Item = { id: string; title: string; type: string; url: string; order: number };
 
@@ -8,6 +8,11 @@ export default function GalleryTab() {
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [dragOverDrop, setDragOverDrop] = useState(false);
+  const [dragIdx, setDragIdx] = useState<number | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+  const [saving, setSaving] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { fetchItems(); }, []);
 
@@ -19,9 +24,7 @@ export default function GalleryTab() {
     setLoading(false);
   }
 
-  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  async function uploadFile(file: File) {
     setUploading(true);
     setUploadError(null);
     try {
@@ -33,14 +36,17 @@ export default function GalleryTab() {
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
         setUploadError(err.error || `Kļūda: ${res.status}`);
-      } else {
-        await fetchItems();
       }
     } catch (err) {
       setUploadError(`Savienojuma kļūda: ${err}`);
     }
     setUploading(false);
-    e.target.value = "";
+  }
+
+  async function handleFiles(files: FileList | File[]) {
+    const arr = Array.from(files);
+    for (const file of arr) await uploadFile(file);
+    await fetchItems();
   }
 
   async function deleteItem(id: string) {
@@ -49,53 +55,154 @@ export default function GalleryTab() {
     fetchItems();
   }
 
+  // ── Drag & drop upload ──────────────────────────────────────────
+  function onDropZoneDragOver(e: React.DragEvent) {
+    e.preventDefault();
+    setDragOverDrop(true);
+  }
+  function onDropZoneDragLeave() { setDragOverDrop(false); }
+  function onDropZoneDrop(e: React.DragEvent) {
+    e.preventDefault();
+    setDragOverDrop(false);
+    if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+  }
+
+  // ── Drag to reorder ─────────────────────────────────────────────
+  function onItemDragStart(e: React.DragEvent, idx: number) {
+    setDragIdx(idx);
+    e.dataTransfer.effectAllowed = "move";
+  }
+  function onItemDragOver(e: React.DragEvent, idx: number) {
+    e.preventDefault();
+    if (dragIdx === null || dragIdx === idx) return;
+    setDragOverIdx(idx);
+  }
+  function onItemDrop(e: React.DragEvent, idx: number) {
+    e.preventDefault();
+    if (dragIdx === null || dragIdx === idx) return;
+    const reordered = [...items];
+    const [moved] = reordered.splice(dragIdx, 1);
+    reordered.splice(idx, 0, moved);
+    setItems(reordered);
+    setDragIdx(null);
+    setDragOverIdx(null);
+    saveOrder(reordered);
+  }
+  function onItemDragEnd() {
+    setDragIdx(null);
+    setDragOverIdx(null);
+  }
+
+  async function saveOrder(ordered: Item[]) {
+    setSaving(true);
+    await fetch("/api/admin/gallery", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orders: ordered.map((it, i) => ({ id: it.id, order: i })) }),
+    });
+    setSaving(false);
+  }
+
   return (
     <div>
+      {/* Header */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
-        <h2 style={{ fontSize: "1.2rem", color: "#0A1F48", margin: 0 }}>Galerija</h2>
+        <h2 style={{ fontSize: "1.2rem", color: "#0A1F48", margin: 0 }}>
+          Galerija {saving && <span style={{ fontSize: "0.7rem", color: "#888", fontWeight: 400 }}>Saglabā secību...</span>}
+        </h2>
         <label style={{
-          background: "#0A1F48", color: "#fff", padding: "0.6rem 1.2rem", borderRadius: "8px",
-          cursor: "pointer", fontSize: "0.8rem", letterSpacing: "0.1em",
-          opacity: uploading ? 0.6 : 1,
+          background: uploading ? "#555" : "#0A1F48", color: "#fff", padding: "0.6rem 1.2rem", borderRadius: "8px",
+          cursor: uploading ? "not-allowed" : "pointer", fontSize: "0.8rem", letterSpacing: "0.1em",
+          opacity: uploading ? 0.7 : 1,
         }}>
           {uploading ? "Augšupielādē..." : "+ Pievienot"}
-          <input type="file" accept="image/*,video/*" onChange={handleUpload} style={{ display: "none" }} disabled={uploading} />
+          <input ref={fileInputRef} type="file" accept="image/*,video/*" multiple
+            onChange={e => e.target.files && handleFiles(e.target.files)}
+            style={{ display: "none" }} disabled={uploading} />
         </label>
       </div>
+
       {uploadError && (
         <p style={{ color: "#c0392b", fontSize: "0.8rem", marginBottom: "1rem", background: "#fdf0ef", padding: "0.7rem 1rem", borderRadius: "6px" }}>
           ⚠ {uploadError}
         </p>
       )}
 
+      {/* Drop zone */}
+      <div
+        onDragOver={onDropZoneDragOver}
+        onDragLeave={onDropZoneDragLeave}
+        onDrop={onDropZoneDrop}
+        onClick={() => fileInputRef.current?.click()}
+        style={{
+          border: `2px dashed ${dragOverDrop ? "#0A1F48" : "#d0cfc8"}`,
+          borderRadius: "10px",
+          padding: "1.5rem",
+          textAlign: "center",
+          marginBottom: "1.5rem",
+          cursor: "pointer",
+          background: dragOverDrop ? "#f0ede4" : "#fafaf8",
+          transition: "all 0.2s",
+        }}
+      >
+        <p style={{ margin: 0, fontSize: "0.8rem", color: dragOverDrop ? "#0A1F48" : "#aaa", letterSpacing: "0.05em" }}>
+          {dragOverDrop ? "Atlaid lai augšupielādētu" : "Ievelc šeit bildes vai video, vai klikšķini lai izvēlētos"}
+        </p>
+      </div>
+
       {loading ? (
         <p style={{ color: "#888" }}>Ielādē...</p>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "1rem" }}>
-          {items.map(item => (
-            <div key={item.id} style={{ background: "#fff", borderRadius: "10px", overflow: "hidden", border: "1px solid #eee" }}>
-              <div style={{ height: "140px", background: "#f0ede4", position: "relative" }}>
-                {item.type === "image" ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={item.url} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                ) : (
-                  <video src={item.url} style={{ width: "100%", height: "100%", objectFit: "cover" }} muted />
-                )}
-                <button
-                  onClick={() => deleteItem(item.id)}
-                  style={{ position: "absolute", top: "6px", right: "6px", background: "rgba(0,0,0,0.6)", border: "none", color: "#fff", borderRadius: "50%", width: "26px", height: "26px", cursor: "pointer", fontSize: "0.8rem" }}
-                >
-                  ×
-                </button>
+        <>
+          {items.length > 0 && (
+            <p style={{ fontSize: "0.7rem", color: "#aaa", marginBottom: "0.75rem", letterSpacing: "0.05em" }}>
+              Velc vienumu lai mainītu secību
+            </p>
+          )}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "1rem" }}>
+            {items.map((item, idx) => (
+              <div
+                key={item.id}
+                draggable
+                onDragStart={e => onItemDragStart(e, idx)}
+                onDragOver={e => onItemDragOver(e, idx)}
+                onDrop={e => onItemDrop(e, idx)}
+                onDragEnd={onItemDragEnd}
+                style={{
+                  background: "#fff",
+                  borderRadius: "10px",
+                  overflow: "hidden",
+                  border: dragOverIdx === idx ? "2px solid #0A1F48" : "1px solid #eee",
+                  opacity: dragIdx === idx ? 0.4 : 1,
+                  cursor: "grab",
+                  transition: "opacity 0.2s, border 0.15s",
+                }}
+              >
+                <div style={{ height: "140px", background: "#f0ede4", position: "relative" }}>
+                  {item.type === "image" ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={item.url} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  ) : (
+                    <video src={item.url} style={{ width: "100%", height: "100%", objectFit: "cover" }} muted />
+                  )}
+                  <button
+                    onClick={e => { e.stopPropagation(); deleteItem(item.id); }}
+                    style={{ position: "absolute", top: "6px", right: "6px", background: "rgba(0,0,0,0.6)", border: "none", color: "#fff", borderRadius: "50%", width: "26px", height: "26px", cursor: "pointer", fontSize: "0.9rem", lineHeight: 1 }}
+                  >×</button>
+                  {/* Drag handle indicator */}
+                  <div style={{ position: "absolute", top: "6px", left: "6px", color: "rgba(255,255,255,0.7)", fontSize: "0.8rem", lineHeight: 1, userSelect: "none" }}>⠿</div>
+                </div>
+                <div style={{ padding: "0.6rem 0.8rem" }}>
+                  <p style={{ margin: 0, fontSize: "0.75rem", color: "#333", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.title}</p>
+                  <p style={{ margin: 0, fontSize: "0.65rem", color: "#999", textTransform: "uppercase" }}>{item.type}</p>
+                </div>
               </div>
-              <div style={{ padding: "0.6rem 0.8rem" }}>
-                <p style={{ margin: 0, fontSize: "0.75rem", color: "#333", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.title}</p>
-                <p style={{ margin: 0, fontSize: "0.65rem", color: "#999", textTransform: "uppercase" }}>{item.type}</p>
-              </div>
-            </div>
-          ))}
-          {items.length === 0 && <p style={{ color: "#888", gridColumn: "1/-1" }}>Nav neviena vienuma. Pievienojiet pirmo!</p>}
-        </div>
+            ))}
+            {items.length === 0 && (
+              <p style={{ color: "#888", gridColumn: "1/-1" }}>Nav neviena vienuma. Pievienojiet pirmo!</p>
+            )}
+          </div>
+        </>
       )}
     </div>
   );
